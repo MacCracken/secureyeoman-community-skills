@@ -14,13 +14,13 @@
       "type": "string",
       "minLength": 1,
       "maxLength": 200,
-      "description": "Unique, human-readable skill name"
+      "description": "Unique, human-readable skill name (max 200 chars)"
     },
     "description": {
       "type": "string",
       "maxLength": 2000,
       "default": "",
-      "description": "Short description shown in the marketplace"
+      "description": "Short description shown in the marketplace (max 2000 chars)"
     },
     "version": {
       "type": "string",
@@ -30,10 +30,43 @@
       "description": "Semantic version (major.minor.patch)"
     },
     "author": {
-      "type": "string",
-      "maxLength": 200,
-      "default": "",
-      "description": "Author name or GitHub username"
+      "description": "Skill author. May be a plain string (legacy) or a structured object with attribution links.",
+      "oneOf": [
+        {
+          "type": "string",
+          "maxLength": 200,
+          "description": "Legacy string form — your GitHub username or real name."
+        },
+        {
+          "type": "object",
+          "description": "Structured author object with optional attribution links.",
+          "required": ["name"],
+          "additionalProperties": false,
+          "properties": {
+            "name": {
+              "type": "string",
+              "maxLength": 200,
+              "description": "Author display name."
+            },
+            "github": {
+              "type": "string",
+              "maxLength": 200,
+              "description": "GitHub username (without the @ prefix)."
+            },
+            "website": {
+              "type": "string",
+              "format": "uri",
+              "maxLength": 500,
+              "description": "Author or project website URL."
+            },
+            "license": {
+              "type": "string",
+              "maxLength": 100,
+              "description": "SPDX license identifier (e.g. 'MIT', 'Apache-2.0'). Defaults to project license if omitted."
+            }
+          }
+        }
+      ]
     },
     "category": {
       "type": "string",
@@ -59,13 +92,13 @@
       },
       "maxItems": 20,
       "default": [],
-      "description": "Searchable tags"
+      "description": "Searchable tags (lowercase kebab-case, e.g. 'code-review')"
     },
     "instructions": {
       "type": "string",
       "minLength": 1,
       "maxLength": 8000,
-      "description": "Full agent instructions"
+      "description": "Full agent instructions. Minimum 100 words recommended for quality bar."
     },
     "tools": {
       "type": "array",

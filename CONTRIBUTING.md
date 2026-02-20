@@ -4,6 +4,27 @@ Thank you for contributing! This guide covers the standards, review criteria, an
 
 ---
 
+## Skill JSON Format
+
+```json
+{
+  "$schema": "../../schema/skill.schema.json",
+  "name": "My Skill",
+  "description": "One-to-two sentence summary of what the skill does.",
+  "version": "1.0.0",
+  "author": { "name": "Your Name", "github": "your-username", "website": "https://example.com" },
+  "category": "development",
+  "tags": ["tag1", "tag2"],
+  "instructions": "You are... (detailed agent instructions)"
+}
+```
+
+The `author` field accepts either a structured object (recommended) or a plain string:
+- Object: `{ "name": "Your Name", "github": "your-username", "website": "...", "license": "MIT" }`
+- String (legacy): `"your-github-username"`
+
+---
+
 ## Before You Start
 
 - Check that no existing skill already covers your use case (search the `skills/` directory)
@@ -34,7 +55,7 @@ A skill will be accepted if it meets **all** of the following:
 ### Tags & Metadata
 - [ ] At least 2 relevant tags
 - [ ] Description summarises the skill in 1-2 sentences
-- [ ] `author` is set to your GitHub username or real name
+- [ ] `author` is set to your GitHub username/real name (string) or a structured object with at minimum `name` — e.g. `{ "name": "Your Name", "github": "your-username" }`
 - [ ] `version` follows semver (start at `1.0.0`)
 
 ---
