@@ -53,6 +53,33 @@ The `author` field accepts either a structured object (recommended) or a plain s
 | `category` | string | `"general"` | See categories below |
 | `tags` | string[] | `[]` | Searchable tags (max 50 chars each) |
 | `tools` | Tool[] | `[]` | MCP tool definitions (advanced) |
+| `triggerPatterns` | string[] | `[]` | Regex patterns (case-insensitive) that gate instruction injection — see below |
+
+---
+
+## `triggerPatterns` — Instruction-Injection Gate
+
+`triggerPatterns` is an array of up to 20 case-insensitive JavaScript regex strings. When a user message matches **any** pattern, SecureYeoman's `isSkillInContext()` injects the skill's instructions into the system prompt for that turn. When the array is empty, the engine falls back to a loose substring match on the skill name — functional but coarser.
+
+```json
+"triggerPatterns": [
+  "review.*code|code.*review",
+  "\\bpr\\b|pull.?request",
+  "\\bdiff\\b",
+  "audit.*code|code.*audit",
+  "check.*code|look.*code"
+]
+```
+
+**Writing good patterns:**
+
+- **Prefer `word.*word` over bare keywords** — `review.*code` matches "review my code" and "code review" in one pattern.
+- **Anchor noisy words with `\b`** — `\bpr\b` matches "the PR" but not "sprint" or "improve".
+- **5 patterns per skill is the sweet spot** — enough to cover common phrasings, few enough to avoid false positives.
+- **No leading/trailing `^`/`$`** — patterns match anywhere in the message.
+- **Escape backslashes in JSON** — `\b` becomes `\\b` in the JSON string.
+
+All skills in this repository ship with 5 trigger patterns. New contributions must include 5 patterns (validated by the schema `maxItems: 5` guideline).
 
 ---
 

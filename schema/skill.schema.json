@@ -107,6 +107,16 @@
       },
       "default": [],
       "description": "Optional MCP tool definitions (advanced)"
+    },
+    "triggerPatterns": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 500
+      },
+      "maxItems": 20,
+      "description": "Regex patterns (case-insensitive) that gate injection of this skill's instructions into the system prompt. When the user message matches any pattern, the full instructions block is injected. Falls back to skill-name keyword matching when empty. Use specific phrases: e.g. 'review.*code|code.*review', '\\bpr\\b|pull.?request'.",
+      "default": []
     }
   }
 }
