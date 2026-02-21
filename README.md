@@ -177,6 +177,22 @@ The short version:
 
 ---
 
+## Security — Skill Trust Tiers
+
+Community skills (`source: 'community'`) operate in a **read-only tool sandbox**. When a community skill is active, SecureYeoman automatically removes any write, shell, or HTTP tools from the tool list passed to the model — regardless of what the skill's `tools` array declares.
+
+**Permitted tool name prefixes (read-only tier):**
+
+`get_`, `list_`, `read_`, `search_`, `query_`, `fetch_`, `retrieve_`, `find_`, `lookup_`, `check_`, `inspect_`, `describe_`, `show_`, `view_`, `summarise_`, `summarize_`, `analyze_`, `analyse_`, `extract_`, `count_`, `stat_`, `stats_`, `info_`, `status_`, `ping_`, `health_`
+
+**Not permitted for community skills:** `write_`, `delete_`, `execute_`, `create_`, `update_`, `send_`, `run_`, `insert_`, `patch_`, `remove_`, or any tool name not beginning with an allow-listed prefix.
+
+Skill *instructions* (the `instructions` field) are injected into the system prompt normally — the restriction only applies to the tool list. A community skill may still describe tasks in plain language; it simply cannot directly invoke privileged tools.
+
+This is enforced at the SecureYeoman server level (`applySkillTrustFilter` in `soul/skill-trust.ts`) and cannot be overridden from within a skill JSON file.
+
+---
+
 ## Disclaimer
 
 Community skills are contributed by independent authors and are **not reviewed, endorsed, or warranted** by the SecureYeoman project or its maintainers.
