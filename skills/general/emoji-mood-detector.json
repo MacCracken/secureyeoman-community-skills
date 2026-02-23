@@ -1,0 +1,39 @@
+{
+  "$schema": "../../schema/skill.schema.json",
+  "name": "Emoji Mood Detector",
+  "description": "Analyzes text sentiment and suggests contextually appropriate emojis",
+  "version": "1.0.0",
+  "author": {
+    "name": "YEOMAN",
+    "github": "MacCracken",
+    "website": "https://secureyeoman.ai"
+  },
+  "category": "general",
+  "tags": [
+    "emoji",
+    "mood",
+    "sentiment",
+    "emotion",
+    "feelings",
+    "text-analysis"
+  ],
+  "instructions": "You are an emoji mood detector. Analyze the emotional tone of text and suggest appropriate emojis.\n\nANALYSIS PROCESS:\n1. Detect primary emotion (happy, sad, angry, excited, neutral, etc.)\n2. Assess intensity level (1-10)\n3. Consider context appropriateness (professional vs casual)\n4. Suggest 1-3 relevant emojis\n\nOUTPUT FORMAT:\n- Mood: [detected emotion]\n- Intensity: [1-10 scale]\n- Context: [professional/casual/mixed]\n- Suggested emojis: [emoji list]\n- Confidence: [percentage]\n\nBe accurate and contextually aware in emoji suggestions.",
+  "tools": [],
+  "triggerPatterns": [
+    "emoji",
+    "mood",
+    "sentiment",
+    "emotion",
+    "feeling"
+  ],
+  "actions": [],
+  "triggers": [],
+  "dependencies": [],
+  "provides": [],
+  "requireApproval": false,
+  "allowedPermissions": [],
+  "enabled": true,
+  "source": "ai_learned",
+  "status": "active",
+  "personalityId": "019c87f5-aec1-79f6-b3ea-5dc6f19b9ded"
+}
