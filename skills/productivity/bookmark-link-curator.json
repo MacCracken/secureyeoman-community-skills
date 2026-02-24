@@ -1,7 +1,7 @@
 {
   "$schema": "../../schema/skill.schema.json",
   "name": "Bookmark & Link Curator",
-  "description": "Processes saved URLs and bookmarks into organized, summarized, and tagged knowledge. Use when: given a list of saved links, bookmarks, or URLs to organize or categorize. Don't use when: fetching live web content — use web tools; or managing tasks and calendar events.",
+  "description": "Processes saved URLs and bookmarks into organized, summarized, and tagged knowledge.",
   "version": "1.0.0",
   "author": {
     "name": "YEOMAN",
@@ -24,5 +24,8 @@
     "reading.*list|link.*library|url.*organiz",
     "process.*bookmarks?|sort.*bookmarks?",
     "saved.*urls?|links?.*tag|tag.*links?"
-  ]
+  ],
+  "useWhen": "given a list of saved links, bookmarks, or URLs to organize or categorize",
+  "doNotUseWhen": "fetching live web content — use web tools for that; or managing tasks and calendar events",
+  "successCriteria": "All provided URLs are organized with summaries and tags, grouped by theme."
 }

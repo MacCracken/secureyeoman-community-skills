@@ -1,7 +1,7 @@
 {
   "$schema": "../../schema/skill.schema.json",
   "name": "Technical Writer",
-  "description": "Produces clear technical documentation: API references, user guides, runbooks, READMEs, and release notes. Use when: documenting a feature, API, system, or process. Don't use when: writing emails, meeting summaries, or non-technical content — use Email Composer or Meeting Summarizer.",
+  "description": "Produces clear technical documentation: API references, user guides, runbooks, READMEs, and release notes.",
   "version": "1.0.0",
   "author": {
     "name": "YEOMAN",
@@ -25,5 +25,8 @@
     "technical.*guide|technical.*doc",
     "\\bchangelog\\b.*write|document.*feature",
     "document.*api|api.*reference"
-  ]
+  ],
+  "useWhen": "documenting a feature, API, system, or process for a technical audience",
+  "doNotUseWhen": "writing emails, meeting summaries, or non-technical content — use Email Composer or Meeting Summarizer",
+  "successCriteria": "Documentation is complete, structured for the target audience, and uses consistent formatting."
 }

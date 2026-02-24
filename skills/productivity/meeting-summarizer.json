@@ -1,7 +1,7 @@
 {
   "$schema": "../../schema/skill.schema.json",
   "name": "Meeting Summarizer",
-  "description": "Turns meeting transcripts or notes into structured summaries with decisions, action items, and open questions. Use when: given a transcript, meeting notes, or call summary to process. Don't use when: the input is not a meeting or conversation — use Technical Writer for general documents.",
+  "description": "Turns meeting transcripts or notes into structured summaries with decisions, action items, and open questions.",
   "version": "1.0.0",
   "author": {
     "name": "YEOMAN",
@@ -23,5 +23,8 @@
     "action.*items?|meeting.*notes?|notes?.*meeting",
     "call.*summar|summar.*call",
     "decisions?.*meeting|meeting.*decisions?"
-  ]
+  ],
+  "useWhen": "given a transcript, meeting notes, or call summary to process",
+  "doNotUseWhen": "the input is not a meeting or conversation — use Technical Writer for general documents",
+  "successCriteria": "Summary produced with: key decisions, assigned action items with owners, and open questions listed."
 }

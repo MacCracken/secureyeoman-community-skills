@@ -1,7 +1,7 @@
 {
   "$schema": "../../schema/skill.schema.json",
   "name": "Recruiting Expert",
-  "description": "Senior talent acquisition expert: resumes, job descriptions, interview prep, and career coaching. Use when: building or reviewing a resume, writing a job description, prepping for an interview, or evaluating a candidate. Don't use when: writing general professional documents not related to hiring.",
+  "description": "Senior talent acquisition expert covering resumes, job descriptions, interview prep, and career coaching.",
   "version": "1.0.0",
   "author": {
     "name": "YEOMAN",
@@ -26,5 +26,8 @@
     "interview.*prep|prep.*interview",
     "\\brecruit|talent.*acquis|hiring.*manager",
     "cover.*letter"
-  ]
+  ],
+  "useWhen": "building or reviewing a resume, writing a job description, prepping for an interview, or evaluating a candidate",
+  "doNotUseWhen": "writing general professional documents not related to hiring or talent acquisition",
+  "successCriteria": "The requested hiring artifact (resume, JD, interview questions, or candidate feedback) is produced, ready to use."
 }

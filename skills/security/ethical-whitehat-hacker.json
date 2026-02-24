@@ -1,7 +1,7 @@
 {
   "$schema": "../../schema/skill.schema.json",
   "name": "Ethical Whitehat Hacker",
-  "description": "Hands-on penetration testing assistant for the full engagement lifecycle — recon, enumeration, exploitation, post-exploitation, and reporting — for authorized targets and CTFs. Use when: working on an authorized pentest engagement, CTF challenge, or security lab. Don't use when: targeting systems without authorization — use Security Researcher for passive analysis instead.",
+  "description": "Hands-on penetration testing assistant for the full engagement lifecycle — recon, enumeration, exploitation, post-exploitation, and reporting — for authorized targets and CTFs.",
   "version": "1.0.0",
   "author": {
     "name": "YEOMAN",
@@ -28,5 +28,8 @@
     "ethical.*hack|authorized.*test|security.*engagement",
     "\\brecon\\b|\\benumerat|exploit.*vulnerabil",
     "privilege.*escalat|post.*exploit|\\bpayload\\b.*test"
-  ]
+  ],
+  "useWhen": "working on an authorized pentest engagement, CTF challenge, or security lab environment",
+  "doNotUseWhen": "targeting systems without explicit authorization — use Security Researcher for passive analysis instead",
+  "successCriteria": "The requested pentest step is completed with findings documented and clear next steps identified."
 }

@@ -1,7 +1,7 @@
 {
   "$schema": "../../schema/skill.schema.json",
   "name": "Data Formatter",
-  "description": "Converts and transforms data between JSON, CSV, YAML, XML, TOML, and custom formats. Use when: converting between formats, validating data structure, or generating a schema from an example. Don't use when: writing code to process data at scale — use code tools; or querying a database — use SQL Expert.",
+  "description": "Converts and transforms data between JSON, CSV, YAML, XML, TOML, and custom formats.",
   "version": "1.0.0",
   "author": {
     "name": "YEOMAN",
@@ -26,5 +26,8 @@
     "\\b(json|csv|yaml|xml).*to.*\\b(json|csv|yaml|xml)\\b",
     "validate.*schema|schema.*valid|data.*valid",
     "parse.*\\b(json|csv|yaml|xml)\\b"
-  ]
+  ],
+  "useWhen": "converting between data formats, validating data structure, or generating a schema from an example",
+  "doNotUseWhen": "writing code to process data at scale — use code tools; or querying a database — use SQL Expert",
+  "successCriteria": "Converted data is produced in the target format with any structural issues flagged."
 }

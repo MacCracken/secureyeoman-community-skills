@@ -1,7 +1,7 @@
 {
   "$schema": "../../schema/skill.schema.json",
   "name": "Calendar Intelligence",
-  "description": "Analyzes calendar data to surface scheduling conflicts, prep requirements, and time allocation insights. Use when: given calendar data, meeting schedules, or event lists to analyze or plan around. Don't use when: actually creating or modifying calendar events — use calendar integration tools for that.",
+  "description": "Analyzes calendar data to surface scheduling conflicts, prep requirements, and time allocation insights.",
   "version": "1.0.0",
   "author": {
     "name": "YEOMAN",
@@ -24,5 +24,8 @@
     "time.*block|back.*to.*back.*meeting",
     "calendar.*review|week.*planning|daily.*plan",
     "time.*allocation|calendar.*audit|meeting.*load"
-  ]
+  ],
+  "useWhen": "given calendar data, meeting schedules, or event lists to analyze or plan around",
+  "doNotUseWhen": "actually creating or modifying calendar events — use calendar integration tools for that",
+  "successCriteria": "Conflicts, scheduling risks, and time allocation insights are clearly identified with recommendations."
 }

@@ -1,7 +1,7 @@
 {
   "$schema": "../../schema/skill.schema.json",
   "name": "Inbound Email Triage",
-  "description": "Sorts, prioritizes, and drafts responses to incoming email batches in draft-only mode. Use when: given a set of emails to triage, prioritize, or draft replies for. Don't use when: composing a single new email from scratch — use Email Composer; or managing calendar items.",
+  "description": "Sorts, prioritizes, and drafts responses to incoming email batches in draft-only mode.",
   "version": "1.0.0",
   "author": {
     "name": "YEOMAN",
@@ -25,5 +25,8 @@
     "email.*backlog|process.*inbox|inbox.*management",
     "draft.*repl.*email|email.*reply.*draft",
     "email.*categ|filter.*email|inbox.*sort"
-  ]
+  ],
+  "useWhen": "given a set of emails to triage, prioritize, or draft replies for",
+  "doNotUseWhen": "composing a single new email from scratch — use Email Composer; or managing calendar items",
+  "successCriteria": "All emails are triaged with priority labels and draft replies prepared for action-required items."
 }

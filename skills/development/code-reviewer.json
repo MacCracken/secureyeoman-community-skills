@@ -1,7 +1,7 @@
 {
   "$schema": "../../schema/skill.schema.json",
   "name": "Code Reviewer",
-  "description": "Reviews code for correctness, security, performance, and maintainability. Use when: asked to review a PR, diff, file, or function. Don't use when: writing new code, debugging a runtime error, or answering general programming questions.",
+  "description": "Reviews code for correctness, security, performance, and maintainability.",
   "version": "1.0.0",
   "author": {
     "name": "YEOMAN",
@@ -23,5 +23,8 @@
     "\\bdiff\\b",
     "audit.*code|code.*audit",
     "check.*code|look.*code"
-  ]
+  ],
+  "useWhen": "asked to review a PR, diff, file, or function",
+  "doNotUseWhen": "writing new code from scratch, debugging a runtime error, or answering general programming questions",
+  "successCriteria": "Review complete with: summary, critical issues, suggestions, and at least one positive observation."
 }

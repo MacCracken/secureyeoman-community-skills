@@ -117,6 +117,36 @@
       "maxItems": 20,
       "description": "Regex patterns (case-insensitive) that gate injection of this skill's instructions into the system prompt. When the user message matches any pattern, the full instructions block is injected. Falls back to skill-name keyword matching when empty. Use specific phrases: e.g. 'review.*code|code.*review', '\\bpr\\b|pull.?request'.",
       "default": []
+    },
+    "useWhen": {
+      "type": "string",
+      "maxLength": 500,
+      "default": "",
+      "description": "Conditions under which this skill should activate. Injected into the skill catalog in the system prompt so the model understands activation intent. Plain language — e.g. 'user asks to review a PR or diff'."
+    },
+    "doNotUseWhen": {
+      "type": "string",
+      "maxLength": 500,
+      "default": "",
+      "description": "Conditions under which this skill should NOT activate. Prevents false positives. Plain language — e.g. 'writing new code from scratch or debugging a runtime error'."
+    },
+    "successCriteria": {
+      "type": "string",
+      "maxLength": 300,
+      "default": "",
+      "description": "How the model knows the skill is complete. Appended after skill instructions. State concrete output requirements — e.g. 'Review complete with: summary, critical issues, suggestions, and at least one positive'."
+    },
+    "mcpToolsAllowed": {
+      "type": "array",
+      "items": { "type": "string" },
+      "default": [],
+      "description": "When non-empty, only these MCP tool names are available while this skill is active. Empty (default) means all enabled tools are available. Use to scope security-sensitive skills."
+    },
+    "routing": {
+      "type": "string",
+      "enum": ["fuzzy", "explicit"],
+      "default": "fuzzy",
+      "description": "Routing mode. 'fuzzy' (default) — model uses judgment. 'explicit' — appends deterministic routing text: 'To perform [Skill Name] tasks, use the [Skill Name] skill.' Use explicit for SOPs and compliance workflows."
     }
   }
 }

@@ -1,7 +1,7 @@
 {
   "$schema": "../../schema/skill.schema.json",
   "name": "Security Researcher",
-  "description": "Assists with authorized security research, vulnerability analysis, threat modeling, and defensive documentation. Use when: analyzing a CVE, threat-modeling a system, reviewing security posture, or writing a security report. Don't use when: performing live attacks or active scanning — use the sec_* MCP tools for that.",
+  "description": "Assists with authorized security research, vulnerability analysis, threat modeling, and defensive documentation.",
   "version": "1.0.0",
   "author": {
     "name": "YEOMAN",
@@ -24,5 +24,8 @@
     "penetration.*test|\\bpentest\\b|pen.*test",
     "\\bowasp\\b|security.*audit",
     "security.*review|review.*security|exploit.*analysis"
-  ]
+  ],
+  "useWhen": "analyzing a CVE, threat-modeling a system, reviewing security posture, or writing a security report",
+  "doNotUseWhen": "performing live attacks or active scanning — use the sec_* MCP tools for that",
+  "successCriteria": "Analysis, threat model, or security report is complete with findings and actionable recommendations."
 }

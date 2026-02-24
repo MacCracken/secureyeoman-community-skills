@@ -42,7 +42,7 @@ A skill will be accepted if it meets **all** of the following:
 - [ ] `name` clearly describes what the skill does
 - [ ] `instructions` are detailed enough that a capable LLM can act on them without additional context
 - [ ] `category` matches the directory the file is placed in
-- [ ] No personally identifiable information (PII), API keys, secrets, or credentials anywhere in the file
+- [ ] No personally identifiable information (PII), API keys, secrets, or credentials anywhere in the file — use `$VAR_NAME` references for any credentials
 - [ ] Valid JSON that passes `schema/skill.schema.json` validation
 
 ### Instructions Quality
@@ -52,9 +52,15 @@ A skill will be accepted if it meets **all** of the following:
 - [ ] Does not hallucinate capabilities the agent doesn't have (e.g., "access the web" without a web tool)
 - [ ] Under 8000 characters
 
+### Routing Quality (Phase 44)
+- [ ] `useWhen` is set when the activation boundary is non-obvious (most skills need this)
+- [ ] `doNotUseWhen` is set to list the most common false-positive scenarios
+- [ ] `successCriteria` is set so the model knows when the skill is complete
+- [ ] `description` is a pure 1-2 sentence summary — routing hints belong in `useWhen`/`doNotUseWhen`, not embedded in `description`
+
 ### Tags & Metadata
 - [ ] At least 2 relevant tags
-- [ ] Description summarises the skill in 1-2 sentences
+- [ ] Description summarises the skill in 1-2 sentences (no embedded "Use when:" text)
 - [ ] `author` is set to your GitHub username/real name (string) or a structured object with at minimum `name` — e.g. `{ "name": "Your Name", "github": "your-username" }`
 - [ ] `version` follows semver (start at `1.0.0`)
 

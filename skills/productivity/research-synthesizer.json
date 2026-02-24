@@ -1,7 +1,7 @@
 {
   "$schema": "../../schema/skill.schema.json",
   "name": "Research Synthesizer",
-  "description": "Searches, aggregates, and synthesizes information from external sources into coherent, cited research output. Use when: asked to research a topic, compile information from multiple sources, or write a literature review. Don't use when: processing internal documents only — use Technical Writer; or querying a database — use SQL Expert.",
+  "description": "Searches, aggregates, and synthesizes information from external sources into coherent, cited research output.",
   "version": "1.0.0",
   "author": {
     "name": "YEOMAN",
@@ -24,5 +24,8 @@
     "\\blit.*review\\b|literature.*review|find.*sources?",
     "fact.*check|cross.*reference.*sources?",
     "investigat.*topic|deep.*research|research.*report"
-  ]
+  ],
+  "useWhen": "asked to research a topic, compile information from multiple sources, or write a literature review",
+  "doNotUseWhen": "processing internal documents only — use Technical Writer; or querying a database — use SQL Expert",
+  "successCriteria": "A coherent, cited synthesis is produced covering the key dimensions of the topic with source attribution."
 }

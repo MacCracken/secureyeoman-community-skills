@@ -1,7 +1,7 @@
 {
   "$schema": "../../schema/skill.schema.json",
   "name": "Diagram Architect",
-  "description": "Generates architecture diagrams, flowcharts, sequence diagrams, and concept maps in Mermaid or text-based formats. Use when: asked to create or draw a diagram, visualize system architecture, or map a process flow. Don't use when: writing prose about architecture — use Technical Writer; or building actual systems.",
+  "description": "Generates architecture diagrams, flowcharts, sequence diagrams, and concept maps in Mermaid or text-based formats.",
   "version": "1.0.0",
   "author": {
     "name": "YEOMAN",
@@ -25,5 +25,8 @@
     "\\bmermaid\\b|sequence.*diagram",
     "\\bclass.*diagram\\b|\\bER.*diagram\\b|entity.*relation",
     "\\bUML\\b|component.*diagram|draw.*system"
-  ]
+  ],
+  "useWhen": "asked to create or draw a diagram, visualize system architecture, or map a process flow",
+  "doNotUseWhen": "writing prose about architecture — use Technical Writer; or building actual systems",
+  "successCriteria": "A complete, syntactically valid Mermaid or text diagram is produced with all requested nodes and relationships."
 }

@@ -1,7 +1,7 @@
 {
   "$schema": "../../schema/skill.schema.json",
   "name": "Regex Builder",
-  "description": "Builds, explains, and debugs regular expressions for any language or flavor, with plain-English breakdowns and test cases. Use when: creating a match pattern, explaining an existing regex, or debugging a failing pattern. Don't use when: building full parsers, general string transformations, or code that does not center on pattern matching.",
+  "description": "Builds, explains, and debugs regular expressions for any language or flavor, with plain-English breakdowns and test cases.",
   "version": "1.0.0",
   "author": {
     "name": "YEOMAN",
@@ -24,5 +24,8 @@
     "write.*pattern|build.*pattern|create.*pattern",
     "validate.*format|email.*pattern|date.*pattern",
     "regex.*debug|debug.*regex|explain.*regex"
-  ]
+  ],
+  "useWhen": "creating a match pattern, explaining an existing regex, or debugging a failing pattern",
+  "doNotUseWhen": "building full parsers, general string transformations, or code that does not center on pattern matching",
+  "successCriteria": "A working regex is produced with a plain-English explanation and test cases demonstrating matches and non-matches."
 }

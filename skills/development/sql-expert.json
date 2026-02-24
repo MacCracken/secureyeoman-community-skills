@@ -1,7 +1,7 @@
 {
   "$schema": "../../schema/skill.schema.json",
   "name": "SQL Expert",
-  "description": "Writes, optimizes, and explains SQL for PostgreSQL, MySQL, and SQLite. Use when: writing a query, optimizing a slow query, explaining a query plan, or designing a schema. Don't use when: working with non-SQL databases, writing application-layer code, or debugging ORM-level issues.",
+  "description": "Writes, optimizes, and explains SQL for PostgreSQL, MySQL, and SQLite.",
   "version": "1.0.0",
   "author": {
     "name": "YEOMAN",
@@ -24,5 +24,8 @@
     "schema.*design|design.*schema",
     "slow.*query|query.*optim|\\bindex.*perform",
     "\\bselect\\b.*\\bfrom\\b|\\bjoin\\b.*\\bwhere\\b"
-  ]
+  ],
+  "useWhen": "writing a query, optimizing a slow query, explaining a query plan, or designing a schema",
+  "doNotUseWhen": "working with non-SQL databases, writing application-layer code, or debugging ORM-level issues",
+  "successCriteria": "A working SQL query, optimization, or schema is produced with a brief explanation."
 }

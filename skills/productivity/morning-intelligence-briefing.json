@@ -1,7 +1,7 @@
 {
   "$schema": "../../schema/skill.schema.json",
   "name": "Morning Intelligence Briefing",
-  "description": "Compiles a structured daily briefing from news, feeds, calendar, and tasks. Use when: preparing a morning summary, daily digest, or situational awareness brief. Don't use when: researching a specific topic — use Research Synthesizer; or summarizing a single meeting — use Meeting Summarizer.",
+  "description": "Compiles a structured daily briefing from news, feeds, calendar, and tasks.",
   "version": "1.0.0",
   "author": {
     "name": "YEOMAN",
@@ -24,5 +24,8 @@
     "\\bdaily.*standup.*brief\\b|situational.*awareness",
     "morning.*report|daily.*intel|briefing.*today",
     "what.*happening.*today|today.*news.*summar"
-  ]
+  ],
+  "useWhen": "preparing a morning summary, daily digest, or situational awareness brief",
+  "doNotUseWhen": "researching a specific topic — use Research Synthesizer; or summarizing a single meeting — use Meeting Summarizer",
+  "successCriteria": "A structured daily briefing is produced covering the requested sources in priority order."
 }

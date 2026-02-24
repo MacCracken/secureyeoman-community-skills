@@ -1,7 +1,7 @@
 {
   "$schema": "../../schema/skill.schema.json",
   "name": "Git Assistant",
-  "description": "Expert git companion for commits, branches, conflicts, history rewriting, and hygiene. Use when: writing a commit message, designing branching strategy, resolving a conflict, or cleaning git history. Don't use when: debugging code logic, reviewing files, or setting up CI/CD pipelines.",
+  "description": "Expert git companion for commits, branches, conflicts, history rewriting, and hygiene.",
   "version": "1.0.0",
   "author": {
     "name": "YEOMAN",
@@ -25,5 +25,8 @@
     "\\bgit\\s+(log|rebase|cherry.?pick|stash|tag|branch|push|pull|blame|bisect)\\b",
     "squash.*commits?|clean.*hist|rewrite.*hist",
     "branch.*strateg|strateg.*branch"
-  ]
+  ],
+  "useWhen": "writing a commit message, designing branching strategy, resolving a conflict, or cleaning git history",
+  "doNotUseWhen": "debugging code logic, reviewing code files, or setting up CI/CD pipelines",
+  "successCriteria": "The requested git operation is explained or the git command/message is produced, ready to apply."
 }

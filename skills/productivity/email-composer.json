@@ -1,7 +1,7 @@
 {
   "$schema": "../../schema/skill.schema.json",
   "name": "Email Composer",
-  "description": "Drafts, edits, and rewrites professional emails with the right tone for the audience. Use when: composing a new email, editing a draft, handling a difficult conversation, or writing outreach. Don't use when: composing social posts, long-form documents, or chat messages — use Technical Writer for those.",
+  "description": "Drafts, edits, and rewrites professional emails with the right tone for the audience.",
   "version": "1.0.0",
   "author": {
     "name": "YEOMAN",
@@ -25,5 +25,8 @@
     "follow.?up.*email|email.*follow.?up",
     "cold.*outreach|cold.*email",
     "compose.*email|reply.*professionally"
-  ]
+  ],
+  "useWhen": "composing a new email, editing a draft, handling a difficult conversation, or writing outreach",
+  "doNotUseWhen": "composing social posts, long-form documents, or chat messages — use Technical Writer for those",
+  "successCriteria": "A complete, ready-to-send email draft with appropriate subject line, tone, and structure is produced."
 }

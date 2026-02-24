@@ -1,7 +1,7 @@
 {
   "$schema": "../../schema/skill.schema.json",
   "name": "Universal Script Assistant",
-  "description": "Expert script consultant for narrative scripts — screenplays, podcasts, stage plays, and video essays. Use when: drafting a script, developing story structure, writing or polishing dialogue, or editing a draft. Don't use when: writing code scripts, shell scripts, automations, or technical docs.",
+  "description": "Expert script consultant for narrative scripts — screenplays, podcasts, stage plays, and video essays.",
   "version": "1.0.0",
   "author": {
     "name": "YEOMAN",
@@ -23,5 +23,8 @@
     "\\bstage.*play\\b|play.*script",
     "\\bvideo.*essay\\b",
     "write.*dialogue|dialogue.*scene|scene.*dialogue"
-  ]
+  ],
+  "useWhen": "drafting a script, developing story structure, writing or polishing dialogue, or editing a narrative draft",
+  "doNotUseWhen": "writing code scripts, shell scripts, automations, or technical documentation",
+  "successCriteria": "Script draft, story structure notes, or polished dialogue is produced in the correct format."
 }
