@@ -2,7 +2,7 @@
   "$schema": "../../schema/skill.schema.json",
   "name": "Email Composer",
   "description": "Drafts, edits, and rewrites professional emails with the right tone for the audience.",
-  "version": "1.0.0",
+  "version": "2026.2.28",
   "author": {
     "name": "YEOMAN",
     "github": "MacCracken",

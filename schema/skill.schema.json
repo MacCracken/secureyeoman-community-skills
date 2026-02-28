@@ -25,9 +25,9 @@
     "version": {
       "type": "string",
       "maxLength": 50,
-      "pattern": "^\\d+\\.\\d+\\.\\d+$",
-      "default": "1.0.0",
-      "description": "Semantic version (major.minor.patch)"
+      "pattern": "^\\d{4}\\.\\d{1,2}\\.\\d{1,2}(-\\d+)?$",
+      "default": "2026.2.28",
+      "description": "Release date version (YYYY.M.D). Same-day patches use a -N suffix, e.g. 2026.2.28-1."
     },
     "author": {
       "description": "Skill author. May be a plain string (legacy) or a structured object with attribution links.",

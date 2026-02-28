@@ -2,7 +2,7 @@
   "$schema": "../../schema/skill.schema.json",
   "name": "Research Synthesizer",
   "description": "Searches, aggregates, and synthesizes information from external sources into coherent, cited research output.",
-  "version": "1.0.0",
+  "version": "2026.2.28",
   "author": {
     "name": "YEOMAN",
     "github": "MacCracken",

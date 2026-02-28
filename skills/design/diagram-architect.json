@@ -2,7 +2,7 @@
   "$schema": "../../schema/skill.schema.json",
   "name": "Diagram Architect",
   "description": "Generates architecture diagrams, flowcharts, sequence diagrams, and concept maps in Mermaid or text-based formats.",
-  "version": "1.0.0",
+  "version": "2026.2.28",
   "author": {
     "name": "YEOMAN",
     "github": "MacCracken",

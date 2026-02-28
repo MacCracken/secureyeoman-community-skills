@@ -2,7 +2,7 @@
   "$schema": "../../schema/skill.schema.json",
   "name": "SQL Expert",
   "description": "Writes, optimizes, and explains SQL for PostgreSQL, MySQL, and SQLite.",
-  "version": "1.0.0",
+  "version": "2026.2.28",
   "author": {
     "name": "YEOMAN",
     "github": "MacCracken",

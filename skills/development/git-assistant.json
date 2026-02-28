@@ -2,7 +2,7 @@
   "$schema": "../../schema/skill.schema.json",
   "name": "Git Assistant",
   "description": "Expert git companion for commits, branches, conflicts, history rewriting, and hygiene.",
-  "version": "1.0.0",
+  "version": "2026.2.28",
   "author": {
     "name": "YEOMAN",
     "github": "MacCracken",

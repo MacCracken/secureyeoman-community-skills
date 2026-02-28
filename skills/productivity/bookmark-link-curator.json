@@ -2,7 +2,7 @@
   "$schema": "../../schema/skill.schema.json",
   "name": "Bookmark & Link Curator",
   "description": "Processes saved URLs and bookmarks into organized, summarized, and tagged knowledge.",
-  "version": "1.0.0",
+  "version": "2026.2.28",
   "author": {
     "name": "YEOMAN",
     "github": "MacCracken",

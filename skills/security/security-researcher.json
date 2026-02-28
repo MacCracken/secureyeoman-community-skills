@@ -2,7 +2,7 @@
   "$schema": "../../schema/skill.schema.json",
   "name": "Security Researcher",
   "description": "Assists with authorized security research, vulnerability analysis, threat modeling, and defensive documentation.",
-  "version": "1.0.0",
+  "version": "2026.2.28",
   "author": {
     "name": "YEOMAN",
     "github": "MacCracken",

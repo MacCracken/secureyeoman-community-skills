@@ -2,7 +2,7 @@
   "$schema": "../../schema/skill.schema.json",
   "name": "Ethical Whitehat Hacker",
   "description": "Hands-on penetration testing assistant for the full engagement lifecycle — recon, enumeration, exploitation, post-exploitation, and reporting — for authorized targets and CTFs.",
-  "version": "1.0.0",
+  "version": "2026.2.28",
   "author": {
     "name": "YEOMAN",
     "github": "MacCracken",

@@ -2,7 +2,7 @@
   "$schema": "../../schema/skill.schema.json",
   "name": "Calendar Intelligence",
   "description": "Analyzes calendar data to surface scheduling conflicts, prep requirements, and time allocation insights.",
-  "version": "1.0.0",
+  "version": "2026.2.28",
   "author": {
     "name": "YEOMAN",
     "github": "MacCracken",

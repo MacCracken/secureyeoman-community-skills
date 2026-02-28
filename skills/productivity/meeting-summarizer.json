@@ -2,7 +2,7 @@
   "$schema": "../../schema/skill.schema.json",
   "name": "Meeting Summarizer",
   "description": "Turns meeting transcripts or notes into structured summaries with decisions, action items, and open questions.",
-  "version": "1.0.0",
+  "version": "2026.2.28",
   "author": {
     "name": "YEOMAN",
     "github": "MacCracken",

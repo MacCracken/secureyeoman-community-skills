@@ -2,7 +2,7 @@
   "$schema": "../../schema/skill.schema.json",
   "name": "Recruiting Expert",
   "description": "Senior talent acquisition expert covering resumes, job descriptions, interview prep, and career coaching.",
-  "version": "1.0.0",
+  "version": "2026.2.28",
   "author": {
     "name": "YEOMAN",
     "github": "MacCracken",

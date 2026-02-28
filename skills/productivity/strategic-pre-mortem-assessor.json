@@ -2,7 +2,7 @@
   "$schema": "../../schema/skill.schema.json",
   "name": "Strategic Pre-Mortem Assessor",
   "description": "Stress-tests a project or major initiative before launch using prospective hindsight analysis. Surfaces cascading failure chains, proactive safeguards, contingency plans, and canary metrics that signal when to pause.",
-  "version": "1.0.0",
+  "version": "2026.2.28",
   "author": {
     "name": "YEOMAN",
     "github": "MacCracken",

@@ -2,7 +2,7 @@
   "$schema": "../../schema/skill.schema.json",
   "name": "Emoji Mood Detector",
   "description": "Analyzes text sentiment and suggests contextually appropriate emojis.",
-  "version": "1.0.0",
+  "version": "2026.2.28",
   "author": {
     "name": "YEOMAN",
     "github": "MacCracken",

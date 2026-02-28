@@ -2,7 +2,7 @@
   "$schema": "../../schema/skill.schema.json",
   "name": "Senior Risk Management Consultant",
   "description": "Conducts a structured 2026-focused enterprise risk audit across five categories — operational, financial, strategic, compliance, and reputational — producing a scored risk register with mitigation steps and early warning indicators.",
-  "version": "1.0.0",
+  "version": "2026.2.28",
   "author": {
     "name": "YEOMAN",
     "github": "MacCracken",
