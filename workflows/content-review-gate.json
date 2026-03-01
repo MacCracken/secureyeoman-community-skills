@@ -1,0 +1,61 @@
+{
+  "$schema": "../schema/workflow.schema.json",
+  "name": "Content Review Gate",
+  "description": "A reviewer agent assesses submitted content, conditionally approves or rejects it, and sends a webhook notification with the decision.",
+  "version": "1.0.0",
+  "author": { "name": "SecureYeoman Community", "github": "MacCracken" },
+  "category": "automation",
+  "tags": ["content-review", "moderation", "approval", "webhook"],
+  "autonomyLevel": "L2",
+  "triggers": [
+    {
+      "type": "manual",
+      "config": {}
+    }
+  ],
+  "steps": [
+    {
+      "id": "review",
+      "type": "agent",
+      "label": "Review Content",
+      "config": {
+        "prompt": "Review the provided content for quality, accuracy, and compliance with community standards. Return a JSON object with keys: approved (boolean), score (0-100), feedback (string), and issues (array of strings describing any problems).",
+        "tools": []
+      }
+    },
+    {
+      "id": "branch",
+      "type": "condition",
+      "label": "Approve or Reject",
+      "config": {
+        "condition": "input.approved === true && input.score >= 70"
+      }
+    },
+    {
+      "id": "notify-approved",
+      "type": "webhook",
+      "label": "Notify — Approved",
+      "config": {
+        "url": "{{env.REVIEW_WEBHOOK_URL}}",
+        "method": "POST",
+        "bodyTemplate": "{ \"status\": \"approved\", \"score\": {{input.score}}, \"feedback\": \"{{input.feedback}}\" }"
+      }
+    },
+    {
+      "id": "notify-rejected",
+      "type": "webhook",
+      "label": "Notify — Rejected",
+      "config": {
+        "url": "{{env.REVIEW_WEBHOOK_URL}}",
+        "method": "POST",
+        "bodyTemplate": "{ \"status\": \"rejected\", \"score\": {{input.score}}, \"issues\": {{JSON.stringify(input.issues)}}, \"feedback\": \"{{input.feedback}}\" }"
+      }
+    }
+  ],
+  "edges": [
+    { "from": "review", "to": "branch" },
+    { "from": "branch", "to": "notify-approved", "label": "true" },
+    { "from": "branch", "to": "notify-rejected", "label": "false" }
+  ],
+  "requires": {}
+}

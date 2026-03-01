@@ -97,6 +97,49 @@ A skill will be accepted if it meets **all** of the following:
 
 ---
 
+---
+
+## Contributing Workflows
+
+Workflows live under `workflows/<kebab-case-name>.json` and must conform to `schema/workflow.schema.json`.
+
+### Workflow Quality Bar
+
+- [ ] `name` is unique and clearly describes the automation
+- [ ] `steps` has at least 1 step; each step has `id` and `type`
+- [ ] `requires` is present (may be empty `{}`) — lists integrations and tools the workflow needs
+- [ ] `autonomyLevel` is set (`L1`–`L5`; most community workflows should be `L2` or `L3`)
+- [ ] Agent steps include a clear `prompt` that describes the expected output format
+- [ ] No hardcoded secrets — use `{{env.VAR_NAME}}` references for credentials
+- [ ] Tested locally via `POST /api/v1/workflows/import`
+
+### Workflow PR Format
+
+- Title: `feat: add <workflow name> workflow`
+- Description: what the workflow does, triggers, and integrations required
+
+---
+
+## Contributing Swarm Templates
+
+Swarm templates live under `swarms/<kebab-case-name>.json` and must conform to `schema/swarm-template.schema.json`.
+
+### Swarm Template Quality Bar
+
+- [ ] `name` is unique and describes what the swarm accomplishes
+- [ ] `roles` has at least 2 roles; each role has `role`, `profileName`, and `description`
+- [ ] `strategy` is set (`sequential`, `parallel`, or `dynamic`)
+- [ ] `requires.profileRoles` lists all `profileName` values used in `roles`
+- [ ] Role descriptions explain the agent's specific contribution to the swarm
+- [ ] Tested locally via `POST /api/v1/agents/swarms/templates/import`
+
+### Swarm Template PR Format
+
+- Title: `feat: add <swarm name> swarm template`
+- Description: what the swarm does, strategy rationale, and role breakdown
+
+---
+
 ## License
 
-By submitting a skill, you agree that it is licensed under [MIT](https://opensource.org/licenses/MIT) and can be freely used, modified, and distributed.
+By submitting a skill, workflow, or swarm template, you agree that it is licensed under [MIT](https://opensource.org/licenses/MIT) and can be freely used, modified, and distributed.

@@ -62,6 +62,90 @@ The `author` field accepts either a structured object (recommended) or a plain s
 
 ---
 
+## Workflows
+
+A **workflow** is a directed JSON graph of steps (agent calls, transforms, conditions, webhooks, resource actions) that can be triggered manually or on a schedule. Community workflows are imported into SecureYeoman's workflow engine and can be customised after installation.
+
+### Workflow Format
+
+```json
+{
+  "$schema": "../schema/workflow.schema.json",
+  "name": "My Workflow",
+  "description": "What this workflow does.",
+  "version": "1.0.0",
+  "author": "your-github-username",
+  "category": "automation",
+  "tags": ["tag1"],
+  "autonomyLevel": "L2",
+  "steps": [
+    { "id": "step-1", "type": "agent", "label": "Do Something", "config": { "prompt": "..." } }
+  ],
+  "edges": [{ "from": "step-1", "to": "step-2" }],
+  "triggers": [{ "type": "manual", "config": {} }],
+  "requires": { "integrations": ["gmail"], "tools": [] }
+}
+```
+
+### `requires` — Compatibility Manifest
+
+The `requires` field lists the external dependencies a workflow needs:
+
+| Field | Description |
+|-------|-------------|
+| `integrations` | Integration names (e.g. `gmail`, `github`, `slack`) |
+| `tools` | MCP tool names (e.g. `github_list_issues`) |
+
+When a user imports a workflow, SecureYeoman checks their connected integrations and installed tools against `requires` and shows a compatibility warning if any are missing.
+
+### Workflow Categories
+
+`automation`, `research`, `security`, `development`, `productivity`, `general`
+
+### Workflow Step Types
+
+| Type | Description |
+|------|-------------|
+| `agent` | Runs an LLM agent call |
+| `transform` | Applies a JS expression to reshape data |
+| `condition` | Branches the graph based on a boolean expression |
+| `webhook` | Sends an HTTP request to an external URL |
+| `resource` | Reads or writes a platform resource (knowledge base, memory, etc.) |
+
+---
+
+## Swarm Templates
+
+A **swarm template** defines a multi-agent team that tackles a task cooperatively. Community templates describe the roles and execution strategy — users map roles to their existing agent profiles when importing.
+
+### Swarm Template Format
+
+```json
+{
+  "$schema": "../schema/swarm-template.schema.json",
+  "name": "My Swarm",
+  "description": "What this swarm does.",
+  "version": "1.0.0",
+  "author": "your-github-username",
+  "strategy": "sequential",
+  "roles": [
+    { "role": "analyst",  "profileName": "analyst",  "description": "Analyses requirements" },
+    { "role": "coder",    "profileName": "coder",    "description": "Implements the solution" }
+  ],
+  "requires": { "profileRoles": ["analyst", "coder"] }
+}
+```
+
+### Strategies
+
+| Strategy | Description |
+|----------|-------------|
+| `sequential` | Roles run in order; each receives the previous role's output |
+| `parallel` | Roles run concurrently; a coordinator synthesises results |
+| `dynamic` | A coordinator agent decides which roles to invoke and in what order |
+
+---
+
 ## Routing Quality Fields (Phase 44)
 
 These fields improve skill routing accuracy from ~73% to ~85% by giving the agent explicit activation boundaries and success signals.
@@ -162,15 +246,32 @@ skills/
     security-researcher.json
   utilities/
     data-formatter.json
+workflows/
+  daily-morning-brief.json
+  content-review-gate.json
+  research-report-pipeline.json
+swarms/
+  security-audit-team.json
+  full-stack-dev-crew.json
 ```
 
 Skills **must** live under `skills/<category>/<skill-name>.json`. The category in the path and the `category` field in the JSON should match.
 
+Workflows live under `workflows/<name>.json` and swarm templates under `swarms/<name>.json`.
+
 ---
 
-## JSON Schema
+## JSON Schemas
 
-A formal JSON Schema for skill validation lives at [`schema/skill.schema.json`](schema/skill.schema.json). You can use it in your editor for inline validation:
+Formal JSON Schemas for validation live in the `schema/` directory:
+
+| File | Validates |
+|------|-----------|
+| [`schema/skill.schema.json`](schema/skill.schema.json) | Skills |
+| [`schema/workflow.schema.json`](schema/workflow.schema.json) | Workflows |
+| [`schema/swarm-template.schema.json`](schema/swarm-template.schema.json) | Swarm templates |
+
+Reference a schema in your editor for inline validation:
 
 ```json
 {

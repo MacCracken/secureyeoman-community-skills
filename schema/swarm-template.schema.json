@@ -1,0 +1,80 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "swarm-template.schema.json",
+  "title": "SecureYeoman Swarm Template Shareable",
+  "description": "JSON Schema for community swarm template shareables",
+  "type": "object",
+  "required": ["name", "roles"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200,
+      "description": "Human-readable template name"
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 2000,
+      "description": "Short description shown in the marketplace"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$"
+    },
+    "author": {
+      "oneOf": [
+        { "type": "string", "maxLength": 200 },
+        {
+          "type": "object",
+          "properties": {
+            "name":    { "type": "string", "maxLength": 200 },
+            "github":  { "type": "string", "maxLength": 200 },
+            "website": { "type": "string", "maxLength": 500 },
+            "license": { "type": "string", "maxLength": 100 }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "strategy": {
+      "type": "string",
+      "enum": ["sequential", "parallel", "dynamic"],
+      "description": "Execution strategy for the swarm"
+    },
+    "roles": {
+      "type": "array",
+      "description": "Agent roles in the swarm",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["role", "profileName"],
+        "properties": {
+          "role":        { "type": "string", "description": "Role identifier" },
+          "profileName": { "type": "string", "description": "Agent profile name to use" },
+          "description": { "type": "string", "description": "What this role does" }
+        },
+        "additionalProperties": false
+      }
+    },
+    "coordinatorProfile": {
+      "type": ["string", "null"],
+      "description": "Optional coordinator agent profile for dynamic strategy"
+    },
+    "requires": {
+      "type": "object",
+      "description": "Compatibility manifest",
+      "properties": {
+        "profileRoles": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Agent profile names that must exist in the target system"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

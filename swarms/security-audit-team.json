@@ -1,0 +1,28 @@
+{
+  "$schema": "../schema/swarm-template.schema.json",
+  "name": "Security Audit Team",
+  "description": "A sequential security audit swarm: a researcher identifies attack surfaces, an ethical hacker probes for vulnerabilities, and a technical writer documents the findings.",
+  "version": "1.0.0",
+  "author": { "name": "SecureYeoman Community", "github": "MacCracken" },
+  "strategy": "sequential",
+  "roles": [
+    {
+      "role": "security-researcher",
+      "profileName": "security-researcher",
+      "description": "Identifies attack surfaces and threat vectors in the target system"
+    },
+    {
+      "role": "ethical-hacker",
+      "profileName": "ethical-whitehat-hacker",
+      "description": "Performs authorised vulnerability analysis and proof-of-concept testing"
+    },
+    {
+      "role": "technical-writer",
+      "profileName": "technical-writer",
+      "description": "Produces a structured audit report with findings and remediation guidance"
+    }
+  ],
+  "requires": {
+    "profileRoles": ["security-researcher", "ethical-whitehat-hacker", "technical-writer"]
+  }
+}

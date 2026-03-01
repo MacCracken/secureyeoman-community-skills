@@ -1,0 +1,63 @@
+{
+  "$schema": "../schema/workflow.schema.json",
+  "name": "Research Report Pipeline",
+  "description": "Multi-stage research pipeline: a researcher agent gathers sources, an analyst synthesises findings, a formatter structures the output, and the report is saved to the knowledge base.",
+  "version": "1.0.0",
+  "author": { "name": "SecureYeoman Community", "github": "MacCracken" },
+  "category": "research",
+  "tags": ["research", "report", "pipeline", "multi-agent", "knowledge-base"],
+  "autonomyLevel": "L3",
+  "triggers": [
+    {
+      "type": "manual",
+      "config": {}
+    }
+  ],
+  "steps": [
+    {
+      "id": "research",
+      "type": "agent",
+      "label": "Researcher",
+      "config": {
+        "profile": "researcher",
+        "prompt": "Research the given topic thoroughly. Gather at least 5 credible sources, summarise key findings, and identify open questions. Return structured JSON with: topic, sources (array), findings (array), openQuestions (array)."
+      }
+    },
+    {
+      "id": "analyse",
+      "type": "agent",
+      "label": "Analyst",
+      "config": {
+        "profile": "analyst",
+        "prompt": "Analyse the research findings provided. Identify patterns, contradictions, and the most important insights. Return JSON with: keyInsights (array), patterns (array), contradictions (array), recommendation (string)."
+      }
+    },
+    {
+      "id": "format",
+      "type": "transform",
+      "label": "Format Report",
+      "config": {
+        "expression": "'# Research Report: ' + research.topic + '\\n\\n## Key Insights\\n' + analysis.keyInsights.map(i => '- ' + i).join('\\n') + '\\n\\n## Sources\\n' + research.sources.map(s => '- ' + s).join('\\n') + '\\n\\n## Recommendation\\n' + analysis.recommendation"
+      }
+    },
+    {
+      "id": "save",
+      "type": "resource",
+      "label": "Save to Knowledge Base",
+      "config": {
+        "resource": "knowledge",
+        "action": "ingest_text",
+        "params": {
+          "title": "Research: {{research.topic}}",
+          "text": "{{input}}"
+        }
+      }
+    }
+  ],
+  "edges": [
+    { "from": "research", "to": "analyse" },
+    { "from": "analyse", "to": "format" },
+    { "from": "format", "to": "save" }
+  ],
+  "requires": {}
+}

@@ -1,0 +1,119 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "workflow.schema.json",
+  "title": "SecureYeoman Workflow Shareable",
+  "description": "JSON Schema for community workflow shareables",
+  "type": "object",
+  "required": ["name", "steps"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200,
+      "description": "Human-readable workflow name"
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 2000,
+      "description": "Short description shown in the marketplace"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "Semantic version (e.g. 1.0.0)"
+    },
+    "author": {
+      "oneOf": [
+        { "type": "string", "maxLength": 200 },
+        {
+          "type": "object",
+          "properties": {
+            "name":    { "type": "string", "maxLength": 200 },
+            "github":  { "type": "string", "maxLength": 200 },
+            "website": { "type": "string", "maxLength": 500 },
+            "license": { "type": "string", "maxLength": 100 }
+          },
+          "additionalProperties": false
+        }
+      ]
+    },
+    "category": {
+      "type": "string",
+      "enum": ["automation", "research", "security", "development", "productivity", "general"],
+      "description": "Primary workflow category"
+    },
+    "tags": {
+      "type": "array",
+      "items": { "type": "string", "maxLength": 50 },
+      "maxItems": 20
+    },
+    "steps": {
+      "type": "array",
+      "description": "Ordered list of workflow steps",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["id", "type"],
+        "properties": {
+          "id":          { "type": "string" },
+          "type":        { "type": "string" },
+          "label":       { "type": "string" },
+          "description": { "type": "string" },
+          "config":      { "type": "object" },
+          "triggerMode": { "type": "string", "enum": ["any", "all"] }
+        },
+        "additionalProperties": true
+      }
+    },
+    "edges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["from", "to"],
+        "properties": {
+          "from": { "type": "string" },
+          "to":   { "type": "string" }
+        },
+        "additionalProperties": true
+      }
+    },
+    "triggers": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["type"],
+        "properties": {
+          "type":   { "type": "string" },
+          "config": { "type": "object" }
+        },
+        "additionalProperties": true
+      }
+    },
+    "autonomyLevel": {
+      "type": "string",
+      "enum": ["L1", "L2", "L3", "L4", "L5"],
+      "description": "Autonomy level: L1 (fully supervised) to L5 (fully autonomous)"
+    },
+    "requires": {
+      "type": "object",
+      "description": "Compatibility manifest — lists integrations and MCP tools needed",
+      "properties": {
+        "integrations": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "Integration names required (e.g. gmail, github, slack)"
+        },
+        "tools": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "MCP tool names required (e.g. github_list_issues)"
+        }
+      },
+      "additionalProperties": false
+    }
+  }
+}

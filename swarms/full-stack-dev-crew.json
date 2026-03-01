@@ -1,0 +1,28 @@
+{
+  "$schema": "../schema/swarm-template.schema.json",
+  "name": "Full-Stack Dev Crew",
+  "description": "A sequential development swarm: an analyst clarifies requirements, a coder implements them, and a reviewer checks the output for quality and correctness.",
+  "version": "1.0.0",
+  "author": { "name": "SecureYeoman Community", "github": "MacCracken" },
+  "strategy": "sequential",
+  "roles": [
+    {
+      "role": "analyst",
+      "profileName": "analyst",
+      "description": "Analyses requirements and produces a clear implementation plan"
+    },
+    {
+      "role": "coder",
+      "profileName": "coder",
+      "description": "Implements the feature or fix based on the analyst's plan"
+    },
+    {
+      "role": "reviewer",
+      "profileName": "reviewer",
+      "description": "Reviews the implementation for correctness, security, and style"
+    }
+  ],
+  "requires": {
+    "profileRoles": ["analyst", "coder", "reviewer"]
+  }
+}

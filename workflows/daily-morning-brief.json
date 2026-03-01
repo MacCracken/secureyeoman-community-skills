@@ -1,0 +1,52 @@
+{
+  "$schema": "../schema/workflow.schema.json",
+  "name": "Daily Morning Brief",
+  "description": "Fetches news and calendar context each weekday morning, formats a concise briefing, and delivers it via Gmail.",
+  "version": "1.0.0",
+  "author": { "name": "SecureYeoman Community", "github": "MacCracken" },
+  "category": "productivity",
+  "tags": ["daily-brief", "gmail", "calendar", "news", "automation"],
+  "autonomyLevel": "L3",
+  "triggers": [
+    {
+      "type": "schedule",
+      "config": { "cron": "0 7 * * 1-5", "timezone": "UTC" }
+    }
+  ],
+  "steps": [
+    {
+      "id": "gather-context",
+      "type": "agent",
+      "label": "Gather Morning Context",
+      "config": {
+        "prompt": "Summarise the top 5 news headlines for today and list any calendar events scheduled for today. Return JSON with keys: headlines (array of strings) and events (array of strings).",
+        "tools": ["gmail_list_messages", "search_web"]
+      }
+    },
+    {
+      "id": "format-brief",
+      "type": "transform",
+      "label": "Format Morning Brief",
+      "config": {
+        "expression": "{ subject: 'Morning Brief — ' + new Date().toDateString(), body: '## Headlines\\n' + input.headlines.map((h, i) => (i+1) + '. ' + h).join('\\n') + '\\n\\n## Today\\'s Events\\n' + (input.events.length ? input.events.map((e, i) => '• ' + e).join('\\n') : 'No events scheduled.') }"
+      }
+    },
+    {
+      "id": "deliver",
+      "type": "webhook",
+      "label": "Send via Gmail",
+      "config": {
+        "url": "internal://gmail/send",
+        "method": "POST",
+        "bodyTemplate": "{ \"to\": \"{{env.BRIEF_RECIPIENT}}\", \"subject\": \"{{input.subject}}\", \"body\": \"{{input.body}}\" }"
+      }
+    }
+  ],
+  "edges": [
+    { "from": "gather-context", "to": "format-brief" },
+    { "from": "format-brief", "to": "deliver" }
+  ],
+  "requires": {
+    "integrations": ["gmail"]
+  }
+}
