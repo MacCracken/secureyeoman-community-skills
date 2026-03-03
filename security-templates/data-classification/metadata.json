@@ -1,0 +1,12 @@
+{
+  "$schema": "../../schema/security-template.schema.json",
+  "name": "Data Classification and Handling Policy",
+  "description": "Creates data classification schemes, handling policies, and protection requirements based on data sensitivity levels. Covers PII, PHI, financial data, intellectual property, and regulatory requirements.",
+  "version": "2026.3.2",
+  "author": { "name": "SecureYeoman Community", "github": "MacCracken" },
+  "category": "security",
+  "tags": ["data-classification", "data-protection", "pii", "gdpr", "privacy", "dlp", "security-template"],
+  "requiredIntegrations": [],
+  "autonomyLevel": "L1",
+  "outputFormat": "markdown"
+}

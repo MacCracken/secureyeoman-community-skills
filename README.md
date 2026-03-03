@@ -146,6 +146,176 @@ A **swarm template** defines a multi-agent team that tackles a task cooperativel
 
 ---
 
+## Security Templates
+
+A **security template** is a directory-based prompt template for security assessments and analysis tasks. Unlike JSON skills, security templates use markdown files for rich, structured prompt content with user-fillable placeholders.
+
+### Directory Structure
+
+Each template lives in its own directory under `security-templates/`:
+
+```
+security-templates/
+  incident-response-playbook/
+    system.md          # System prompt — defines the AI persona and methodology
+    user.md            # Input template with {{placeholders}} for user context
+    metadata.json      # Schema-validated metadata (name, tags, version, etc.)
+  cloud-security-posture/
+    system.md
+    user.md
+    metadata.json
+  ...
+```
+
+### File Format
+
+| File | Required | Description |
+|------|----------|-------------|
+| `metadata.json` | Yes | Template metadata conforming to [`schema/security-template.schema.json`](schema/security-template.schema.json). |
+| System prompt (default: `system.md`) | Yes | The system prompt that defines what the AI becomes. Contains the expert persona, assessment methodology, output format, and response guidelines. |
+| User template (default: `user.md`) | No | Input template with `{{placeholder}}` syntax for structured user input. Sections guide the user to provide the right context. |
+
+Filenames are configurable via the `files` field in `metadata.json`:
+
+```json
+{
+  "name": "My Template",
+  "files": {
+    "system": "prompt.md",
+    "user": "input-template.md"
+  }
+}
+```
+
+When `files` is omitted, sync looks for `system.md` and `user.md` by default.
+
+### How Templates Differ from Skills
+
+| Aspect | Skills (JSON) | Security Templates (directory) |
+|--------|--------------|-------------------------------|
+| Format | Single `.json` file | Directory with `.md` + `.json` |
+| Content | `instructions` field (plain text) | Separate `system.md` and `user.md` (rich markdown) |
+| Input | Free-form user message | Structured `{{placeholder}}` template |
+| Best for | General agent capabilities | Domain-specific assessments with structured input |
+
+### Available Templates
+
+| Template | Focus |
+|----------|-------|
+| `incident-response-playbook` | IR triage, containment, and recovery playbook generation |
+| `cloud-security-posture` | AWS/Azure/GCP misconfiguration and IAM review |
+| `api-security-assessment` | OWASP API Security Top 10 assessment framework |
+| `supply-chain-risk` | Third-party dependency and vendor risk evaluation |
+| `data-classification` | Data sensitivity classification and handling policy |
+| `network-segmentation-review` | Network zone architecture and lateral movement analysis |
+| `compliance-gap-analysis` | ISO 27001 / NIST CSF / SOC 2 gap identification |
+
+### Syncing Security Templates
+
+Security templates are synced alongside skills and workflows when you run community sync. They are stored as marketplace skills with the `security-template` tag.
+
+```bash
+POST /api/v1/marketplace/community/sync
+```
+
+The sync reads `system.md` as the skill instructions and appends `user.md` (if present) as a "User Input Template" section.
+
+---
+
+## Personalities
+
+A **personality** is a portable markdown file that defines an agent persona — identity, traits, system prompt, and optional configuration. Personalities use YAML frontmatter for metadata and markdown sections for rich content.
+
+### Personality Format
+
+```markdown
+---
+name: "My Personality"
+version: "1.0.0"
+description: "What this personality does"
+traits: [trait1, trait2, trait3]
+defaultModel: { provider: "anthropic", model: "claude-sonnet-4-6" }
+---
+
+# Identity & Purpose
+
+Your system prompt goes here — this becomes the personality's core instructions.
+
+# Traits
+
+- **trait1**: Description of trait1
+- **trait2**: Description of trait2
+
+# Configuration
+
+\`\`\`yaml
+enabled: true
+omnipresentMind: false
+\`\`\`
+
+# Model Fallbacks
+
+- openai/gpt-4o
+- anthropic/claude-3-haiku
+```
+
+### Sections
+
+| Section | Required | Description |
+|---------|----------|-------------|
+| `# Identity & Purpose` | Yes | The system prompt content — defines what the AI becomes |
+| `# Traits` | No | Key-value trait descriptions using `- **key**: value` format |
+| `# Configuration` | No | YAML code block with non-default body config overrides |
+| `# Model Fallbacks` | No | Fallback models as `provider/model` list items |
+
+### Available Personalities
+
+| Personality | Focus |
+|-------------|-------|
+| `security-analyst` | Defensive security analysis, threat detection, incident response |
+| `code-reviewer` | Thorough code review with security, performance, and quality focus |
+| `research-assistant` | Academic/technical research with citation-driven methodology |
+
+### Syncing Personalities
+
+Personalities are synced alongside skills when you run community sync. They are parsed from markdown and created as SecureYeoman personalities with a `[community]` marker in the description.
+
+---
+
+## Themes
+
+A **theme** is a JSON file that defines CSS custom property overrides for the SecureYeoman dashboard. Community themes are synced as marketplace skills with the `community-theme` tag.
+
+### Theme Format
+
+```json
+{
+  "$schema": "../schema/theme.schema.json",
+  "name": "My Theme",
+  "description": "What this theme looks like",
+  "author": "your-github-username",
+  "version": "1.0.0",
+  "isDark": true,
+  "preview": ["#background", "#foreground", "#accent"],
+  "variables": {
+    "background": "#hex",
+    "foreground": "#hex",
+    "primary": "#hex",
+    "...": "..."
+  }
+}
+```
+
+### Available Themes
+
+| Theme | Description |
+|-------|-------------|
+| `ocean-breeze` | Cool blue/teal dark theme |
+| `forest-canopy` | Green/earth-tone dark theme |
+| `sunset-glow` | Warm orange/amber light theme |
+
+---
+
 ## Routing Quality Fields (Phase 44)
 
 These fields improve skill routing accuracy from ~73% to ~85% by giving the agent explicit activation boundaries and success signals.
@@ -253,11 +423,18 @@ workflows/
 swarms/
   security-audit-team.json
   full-stack-dev-crew.json
+security-templates/
+  incident-response-playbook/
+    system.md
+    user.md
+    metadata.json
+  cloud-security-posture/
+    ...
 ```
 
 Skills **must** live under `skills/<category>/<skill-name>.json`. The category in the path and the `category` field in the JSON should match.
 
-Workflows live under `workflows/<name>.json` and swarm templates under `swarms/<name>.json`.
+Workflows live under `workflows/<name>.json`, swarm templates under `swarms/<name>.json`, and security templates under `security-templates/<name>/`.
 
 ---
 
@@ -270,6 +447,7 @@ Formal JSON Schemas for validation live in the `schema/` directory:
 | [`schema/skill.schema.json`](schema/skill.schema.json) | Skills |
 | [`schema/workflow.schema.json`](schema/workflow.schema.json) | Workflows |
 | [`schema/swarm-template.schema.json`](schema/swarm-template.schema.json) | Swarm templates |
+| [`schema/security-template.schema.json`](schema/security-template.schema.json) | Security template metadata |
 
 Reference a schema in your editor for inline validation:
 

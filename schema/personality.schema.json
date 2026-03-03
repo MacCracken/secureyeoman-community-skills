@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://secureyeoman.com/schemas/personality.schema.json",
+  "title": "SecureYeoman Community Personality",
+  "description": "Schema for the YAML frontmatter of a community personality markdown file. The body contains markdown sections (# Identity & Purpose, # Traits, etc.).",
+  "type": "object",
+  "required": ["name"],
+  "properties": {
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100,
+      "description": "Unique personality display name"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d{4}-\\d{2}-\\d{2}$|^\\d+\\.\\d+\\.\\d+$",
+      "description": "Version string (date YYYY-MM-DD or semver)"
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 1000,
+      "description": "Short description of the personality"
+    },
+    "traits": {
+      "type": "array",
+      "items": { "type": "string", "maxLength": 50 },
+      "maxItems": 20,
+      "description": "Trait key names (detail goes in the # Traits section)"
+    },
+    "defaultModel": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "provider": { "type": "string", "minLength": 1 },
+            "model": { "type": "string", "minLength": 1 }
+          },
+          "required": ["provider", "model"]
+        },
+        { "type": "null" }
+      ],
+      "description": "Default AI model to use with this personality"
+    },
+    "sex": {
+      "type": "string",
+      "enum": ["male", "female", "non-binary", "unspecified"],
+      "default": "unspecified"
+    },
+    "voice": {
+      "type": "string",
+      "maxLength": 200,
+      "description": "Voice description for TTS"
+    },
+    "preferredLanguage": {
+      "type": "string",
+      "maxLength": 100,
+      "description": "ISO language code or description"
+    }
+  },
+  "additionalProperties": false
+}

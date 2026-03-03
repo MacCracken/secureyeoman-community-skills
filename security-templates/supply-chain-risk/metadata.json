@@ -1,0 +1,12 @@
+{
+  "$schema": "../../schema/security-template.schema.json",
+  "name": "Supply Chain Risk Assessment",
+  "description": "Evaluates software supply chain risks including third-party dependencies, vendor security posture, CI/CD pipeline integrity, and artifact provenance. Based on SLSA, NIST SSDF, and OpenSSF Scorecard frameworks.",
+  "version": "2026.3.2",
+  "author": { "name": "SecureYeoman Community", "github": "MacCracken" },
+  "category": "security",
+  "tags": ["supply-chain", "sbom", "slsa", "dependencies", "vendor-risk", "third-party", "security-template"],
+  "requiredIntegrations": [],
+  "autonomyLevel": "L1",
+  "outputFormat": "markdown"
+}

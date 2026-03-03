@@ -1,0 +1,12 @@
+{
+  "$schema": "../../schema/security-template.schema.json",
+  "name": "API Security Assessment",
+  "description": "Systematic assessment of API security against OWASP API Security Top 10 (2023). Covers broken authentication, authorization, excessive data exposure, rate limiting, injection, and mass assignment vulnerabilities.",
+  "version": "2026.3.2",
+  "author": { "name": "SecureYeoman Community", "github": "MacCracken" },
+  "category": "security",
+  "tags": ["api-security", "owasp", "rest-api", "graphql", "authentication", "authorization", "security-template"],
+  "requiredIntegrations": [],
+  "autonomyLevel": "L1",
+  "outputFormat": "markdown"
+}

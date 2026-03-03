@@ -1,0 +1,28 @@
+{
+  "$schema": "../schema/theme.schema.json",
+  "name": "Forest Canopy",
+  "description": "Green and earth-tone dark theme evoking a dense forest canopy",
+  "author": "community",
+  "version": "1.0.0",
+  "isDark": true,
+  "preview": ["#0f1a0f", "#d4e7c5", "#4ade80"],
+  "variables": {
+    "background": "#0f1a0f",
+    "foreground": "#d4e7c5",
+    "card": "#162216",
+    "cardForeground": "#d4e7c5",
+    "primary": "#4ade80",
+    "primaryForeground": "#0f1a0f",
+    "secondary": "#1a3a1a",
+    "secondaryForeground": "#d4e7c5",
+    "muted": "#1f3320",
+    "mutedForeground": "#8fac7f",
+    "accent": "#22c55e",
+    "accentForeground": "#d4e7c5",
+    "destructive": "#ef4444",
+    "destructiveForeground": "#fef2f2",
+    "border": "#1f3320",
+    "input": "#1f3320",
+    "ring": "#4ade80"
+  }
+}

@@ -1,0 +1,127 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://github.com/MacCracken/secureyeoman-community-skills/schema/security-template.schema.json",
+  "title": "SecureYeoman Security Template Metadata",
+  "description": "Schema for metadata.json in community security template directories (security-templates/<name>/metadata.json)",
+  "type": "object",
+  "required": ["name"],
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200,
+      "description": "Unique, human-readable template name (max 200 chars)"
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 2000,
+      "default": "",
+      "description": "Short description shown in the marketplace (max 2000 chars)"
+    },
+    "version": {
+      "type": "string",
+      "maxLength": 50,
+      "pattern": "^\\d{4}\\.\\d{1,2}\\.\\d{1,2}(-\\d+)?$",
+      "default": "2026.3.2",
+      "description": "Release date version (YYYY.M.D). Same-day patches use a -N suffix."
+    },
+    "author": {
+      "description": "Template author. May be a plain string or a structured object with attribution links.",
+      "oneOf": [
+        {
+          "type": "string",
+          "maxLength": 200,
+          "description": "Legacy string form — your GitHub username or real name."
+        },
+        {
+          "type": "object",
+          "description": "Structured author object with optional attribution links.",
+          "required": ["name"],
+          "additionalProperties": false,
+          "properties": {
+            "name": {
+              "type": "string",
+              "maxLength": 200,
+              "description": "Author display name."
+            },
+            "github": {
+              "type": "string",
+              "maxLength": 200,
+              "description": "GitHub username (without the @ prefix)."
+            },
+            "website": {
+              "type": "string",
+              "format": "uri",
+              "maxLength": 500,
+              "description": "Author or project website URL."
+            },
+            "license": {
+              "type": "string",
+              "maxLength": 100,
+              "description": "SPDX license identifier (e.g. 'MIT', 'Apache-2.0')."
+            }
+          }
+        }
+      ]
+    },
+    "category": {
+      "type": "string",
+      "const": "security",
+      "default": "security",
+      "description": "Security templates always have category 'security'"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 50
+      },
+      "maxItems": 20,
+      "default": [],
+      "description": "Searchable tags (lowercase kebab-case). Must include 'security-template'."
+    },
+    "requiredIntegrations": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 100
+      },
+      "maxItems": 20,
+      "default": [],
+      "description": "Integration names required for this template (e.g. 'github', 'slack')"
+    },
+    "autonomyLevel": {
+      "type": "string",
+      "enum": ["L1", "L2", "L3", "L4", "L5"],
+      "default": "L1",
+      "description": "AI autonomy classification level. Community templates should default to L1."
+    },
+    "outputFormat": {
+      "type": "string",
+      "enum": ["markdown", "json", "yaml", "csv"],
+      "default": "markdown",
+      "description": "Expected output format of the template"
+    },
+    "files": {
+      "type": "object",
+      "description": "Override default filenames. Sync looks for these relative to the template directory.",
+      "additionalProperties": false,
+      "properties": {
+        "system": {
+          "type": "string",
+          "default": "system.md",
+          "description": "System prompt file (default: system.md)"
+        },
+        "user": {
+          "type": "string",
+          "default": "user.md",
+          "description": "User input template file (default: user.md)"
+        }
+      }
+    }
+  }
+}

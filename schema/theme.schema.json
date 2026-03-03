@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://secureyeoman.com/schemas/theme.schema.json",
+  "title": "SecureYeoman Community Theme",
+  "description": "Schema for community theme JSON files. Themes define CSS custom property overrides for the SecureYeoman dashboard.",
+  "type": "object",
+  "required": ["name", "variables"],
+  "properties": {
+    "$schema": {
+      "type": "string",
+      "description": "JSON Schema reference"
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 100,
+      "description": "Unique theme display name"
+    },
+    "description": {
+      "type": "string",
+      "maxLength": 500,
+      "description": "Short description of the theme"
+    },
+    "author": {
+      "type": "string",
+      "description": "Theme author name or username"
+    },
+    "version": {
+      "type": "string",
+      "pattern": "^\\d+\\.\\d+\\.\\d+$",
+      "description": "Semantic version"
+    },
+    "isDark": {
+      "type": "boolean",
+      "description": "Whether this is a dark theme"
+    },
+    "preview": {
+      "type": "array",
+      "items": { "type": "string", "pattern": "^#[0-9a-fA-F]{6}$" },
+      "minItems": 3,
+      "maxItems": 3,
+      "description": "Preview colors: [background, foreground, accent]"
+    },
+    "variables": {
+      "type": "object",
+      "required": ["background", "foreground", "primary"],
+      "properties": {
+        "background": { "type": "string" },
+        "foreground": { "type": "string" },
+        "card": { "type": "string" },
+        "cardForeground": { "type": "string" },
+        "primary": { "type": "string" },
+        "primaryForeground": { "type": "string" },
+        "secondary": { "type": "string" },
+        "secondaryForeground": { "type": "string" },
+        "muted": { "type": "string" },
+        "mutedForeground": { "type": "string" },
+        "accent": { "type": "string" },
+        "accentForeground": { "type": "string" },
+        "destructive": { "type": "string" },
+        "destructiveForeground": { "type": "string" },
+        "border": { "type": "string" },
+        "input": { "type": "string" },
+        "ring": { "type": "string" }
+      },
+      "additionalProperties": { "type": "string" },
+      "description": "CSS custom property values keyed by variable name"
+    }
+  },
+  "additionalProperties": false
+}

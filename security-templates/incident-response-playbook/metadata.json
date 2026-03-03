@@ -1,0 +1,12 @@
+{
+  "$schema": "../../schema/security-template.schema.json",
+  "name": "Incident Response Playbook Generator",
+  "description": "Generates structured incident response playbooks covering detection, triage, containment, eradication, recovery, and post-incident review. Tailored to the incident type and organizational context.",
+  "version": "2026.3.2",
+  "author": { "name": "SecureYeoman Community", "github": "MacCracken" },
+  "category": "security",
+  "tags": ["incident-response", "playbook", "triage", "containment", "recovery", "dfir", "security-template"],
+  "requiredIntegrations": [],
+  "autonomyLevel": "L1",
+  "outputFormat": "markdown"
+}

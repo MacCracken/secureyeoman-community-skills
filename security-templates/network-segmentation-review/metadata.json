@@ -1,0 +1,12 @@
+{
+  "$schema": "../../schema/security-template.schema.json",
+  "name": "Network Segmentation Review",
+  "description": "Evaluates network segmentation architecture for lateral movement risks, trust zone boundaries, micro-segmentation readiness, and zero-trust alignment. Covers traditional, cloud, and hybrid network topologies.",
+  "version": "2026.3.2",
+  "author": { "name": "SecureYeoman Community", "github": "MacCracken" },
+  "category": "security",
+  "tags": ["network-segmentation", "zero-trust", "lateral-movement", "firewall", "micro-segmentation", "security-template"],
+  "requiredIntegrations": [],
+  "autonomyLevel": "L1",
+  "outputFormat": "markdown"
+}

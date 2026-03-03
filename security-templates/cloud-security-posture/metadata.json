@@ -1,0 +1,12 @@
+{
+  "$schema": "../../schema/security-template.schema.json",
+  "name": "Cloud Security Posture Assessment",
+  "description": "Evaluates cloud infrastructure configurations against CIS Benchmarks and cloud-native security best practices. Covers IAM, network security, data protection, logging, and resource management across AWS, Azure, and GCP.",
+  "version": "2026.3.2",
+  "author": { "name": "SecureYeoman Community", "github": "MacCracken" },
+  "category": "security",
+  "tags": ["cloud-security", "cspm", "aws", "azure", "gcp", "iam", "cis-benchmarks", "security-template"],
+  "requiredIntegrations": [],
+  "autonomyLevel": "L1",
+  "outputFormat": "markdown"
+}

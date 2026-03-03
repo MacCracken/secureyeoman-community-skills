@@ -1,0 +1,28 @@
+{
+  "$schema": "../schema/theme.schema.json",
+  "name": "Sunset Glow",
+  "description": "Warm orange and amber light theme inspired by golden hour sunsets",
+  "author": "community",
+  "version": "1.0.0",
+  "isDark": false,
+  "preview": ["#fffbf0", "#1c1917", "#f59e0b"],
+  "variables": {
+    "background": "#fffbf0",
+    "foreground": "#1c1917",
+    "card": "#fff7e6",
+    "cardForeground": "#1c1917",
+    "primary": "#f59e0b",
+    "primaryForeground": "#fffbf0",
+    "secondary": "#fde68a",
+    "secondaryForeground": "#78350f",
+    "muted": "#fef3c7",
+    "mutedForeground": "#92400e",
+    "accent": "#ea580c",
+    "accentForeground": "#fffbf0",
+    "destructive": "#dc2626",
+    "destructiveForeground": "#fef2f2",
+    "border": "#fde68a",
+    "input": "#fde68a",
+    "ring": "#f59e0b"
+  }
+}
