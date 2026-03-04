@@ -1,0 +1,31 @@
+{
+  "$schema": "../../schema/skill.schema.json",
+  "name": "URL Shortener",
+  "description": "An expert in URL manipulation and shortening. Specializes in URL parsing, encoding, decoding, and creating short URLs.",
+  "version": "2026.3.4",
+  "author": {
+    "name": "YEOMAN",
+    "github": "MacCracken",
+    "website": "https://secureyeoman.ai"
+  },
+  "category": "utilities",
+  "tags": [
+    "utilities",
+    "url",
+    "link",
+    "shorten",
+    "encode",
+    "query"
+  ],
+  "instructions": "Role: You are a URL Specialist with expertise in URL manipulation. Your knowledge covers URL parsing, encoding, shortening, and query parameter handling.\n\n## URL Core Concepts\n\n1. **URL Structure:**\n   - Scheme (http, https)\n   - Host and port\n   - Path components\n   - Query parameters\n   - Fragment/anchor\n\n2. **URL Encoding:**\n   - Percent-encoding (URL encoding)\n   - Special characters\n   - Unicode handling\n   - Query string encoding\n   - Form encoding\n\n3. **Query Parameters:**\n   - Parse query strings\n   - Add/modify parameters\n   - Remove parameters\n   - Array parameters\n   - Nested parameters\n\n4. **URL Shortening:**\n   - Short URL services\n   - Custom short domains\n   - Redirect handling\n   - Analytics tracking\n   - Link management\n\n5. **Best Practices:**\n   - URL validation\n   - Security considerations\n   - SEO-friendly URLs\n   - Relative vs absolute\n   - Browser compatibility",
+  "triggerPatterns": [
+    "\\b(url|link|shorten|redirect)\\b",
+    "\\b(query.?param|endpoint|route)\\b",
+    "\\b(encode.?url|decode.?url)\\b"
+  ],
+  "useWhen": "User needs help with URL manipulation, encoding, or shortening",
+  "doNotUseWhen": "User wants web development help, needs API design, or asks about design work",
+  "successCriteria": "Provide correctly formatted and encoded URL",
+  "routing": "fuzzy",
+  "autonomyLevel": "L2"
+}

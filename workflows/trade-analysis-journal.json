@@ -1,0 +1,59 @@
+{
+  "$schema": "../schema/workflow.schema.json",
+  "name": "Trade Analysis & Journal Workflow",
+  "description": "Workflow for analyzing completed trades, calculating performance statistics, and generating performance reports with win rate, Sharpe ratio, and max drawdown.",
+  "version": "2026.3.4",
+  "author": { "name": "YEOMAN", "github": "MacCracken" },
+  "category": "trading",
+  "tags": ["trading", "journal", "analysis", "performance", "stats"],
+  "autonomyLevel": "L3",
+  "triggers": [
+    {
+      "type": "manual",
+      "config": {}
+    }
+  ],
+  "steps": [
+    {
+      "id": "collect_trades",
+      "type": "agent",
+      "label": "Collect Trade Data",
+      "config": {
+        "profile": "universal-script-assistant",
+        "prompt": "Collect trade data from the user or trading journal. Gather: entry price, exit price, direction (long/short), instrument, date, position size, and any notes. Return JSON with: trades (array of objects with: entry, exit, direction, instrument, date, size, notes), timePeriod (string), totalTrades (number)."
+      }
+    },
+    {
+      "id": "calculate_stats",
+      "type": "agent",
+      "label": "Calculate Performance Stats",
+      "config": {
+        "profile": "data-formatter",
+        "prompt": "Calculate comprehensive trading statistics from the trade data. Include: total P&L, win rate, average win, average loss, largest win, largest loss, risk/reward ratio, Sharpe ratio (if applicable), max drawdown, profit factor, expectancy. Return JSON with: totalPnL, winRate, avgWin, avgLoss, largestWin, largestLoss, avgRR, sharpeRatio, maxDrawdown, profitFactor, expectancy, tradeCount, winCount, lossCount."
+      }
+    },
+    {
+      "id": "analyze_patterns",
+      "type": "agent",
+      "label": "Analyze Trading Patterns",
+      "config": {
+        "profile": "technical-analysis-specialist",
+        "prompt": "Analyze the trade journal data to identify patterns. Look for: best day of week, best time of day, best instruments, common mistakes, emotional trading patterns, winning vs losing trade characteristics. Return JSON with: patterns (object), strengths (array), weaknesses (array), recommendations (array)."
+      }
+    },
+    {
+      "id": "generate_report",
+      "type": "transform",
+      "label": "Generate Performance Report",
+      "config": {
+        "expression": "# Trade Analysis Report\\n\\n## Summary\\n- Period: {{collect_trades.timePeriod}}\\n- Total Trades: {{calculate_stats.tradeCount}}\\n- Win Rate: {{calculate_stats.winRate}}%\\n\\n## Performance\\n- Total P&L: ${{calculate_stats.totalPnL}}\\n- Profit Factor: {{calculate_stats.profitFactor}}\\n- Expectancy: ${{calculate_stats.expectancy}}\\n- Sharpe Ratio: {{calculate_stats.sharpeRatio}}\\n- Max Drawdown: {{calculate_stats.maxDrawdown}}%\\n\\n## Trade Statistics\\n- Average Win: ${{calculate_stats.avgWin}}\\n- Average Loss: ${{calculate_stats.avgLoss}}\\n- Largest Win: ${{calculate_stats.largestWin}}\\n- Largest Loss: ${{calculate_stats.largestLoss}}\\n\\n## Patterns & Insights\\n### Strengths\\n{{#each analyze_patterns.strengths}}\\n- {{this}}\\n{{/each}}\\n\\n### Weaknesses\\n{{#each analyze_patterns.weaknesses}}\\n- {{this}}\\n{{/each}}\\n\\n### Recommendations\\n{{#each analyze_patterns.recommendations}}\\n- {{this}}\\n{{/each}}"
+      }
+    }
+  ],
+  "edges": [
+    { "from": "collect_trades", "to": "calculate_stats" },
+    { "from": "calculate_stats", "to": "analyze_patterns" },
+    { "from": "analyze_patterns", "to": "generate_report" }
+  ],
+  "requires": {}
+}

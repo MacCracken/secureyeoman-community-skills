@@ -1,0 +1,69 @@
+{
+  "$schema": "../schema/workflow.schema.json",
+  "name": "Risk & Position Sizing Calculator",
+  "description": "Workflow for calculating optimal position sizes, risk/reward ratios, Kelly Criterion position sizing, and portfolio risk metrics for trading.",
+  "version": "2026.3.4",
+  "author": { "name": "YEOMAN", "github": "MacCracken" },
+  "category": "trading",
+  "tags": ["trading", "risk", "position-sizing", "kelly", "calculator"],
+  "autonomyLevel": "L2",
+  "triggers": [
+    {
+      "type": "manual",
+      "config": {}
+    }
+  ],
+  "steps": [
+    {
+      "id": "collect_params",
+      "type": "agent",
+      "label": "Collect Trade Parameters",
+      "config": {
+        "profile": "universal-script-assistant",
+        "prompt": "Collect the following from the user: account balance, risk per trade (percentage), entry price, stop loss price, target price (optional). Also collect: win rate (optional), reward-to-risk ratio (optional), current number of open positions. Return JSON with: accountBalance, riskPercent, entryPrice, stopLoss, targetPrice, winRate, rrRatio, openPositions."
+      }
+    },
+    {
+      "id": "calculate_risk",
+      "type": "agent",
+      "label": "Calculate Risk Parameters",
+      "config": {
+        "profile": "data-formatter",
+        "prompt": "Calculate the following based on input: dollar risk amount, position size (units/contracts), risk per unit, reward-to-risk ratio, potential profit, potential loss, risk/reward. Use standard lot/contract sizes if applicable. Return JSON with: riskAmount, positionSize, units, riskPerUnit, rewardRisk, potentialProfit, potentialLoss, riskRewardRatio."
+      }
+    },
+    {
+      "id": "kelly_criterion",
+      "type": "agent",
+      "label": "Kelly Criterion Analysis",
+      "config": {
+        "profile": "senior-risk-management-consultant",
+        "prompt": "Calculate Kelly Criterion position sizing if win rate and reward-to-risk provided. Kelly % = W - (1-W)/R where W = win rate and R = risk-reward ratio. Provide fractional Kelly suggestions (Full Kelly, Half Kelly, Quarter Kelly). Also calculate: expected value, optimal risk percentage. Return JSON with: fullKelly, halfKelly, quarterKelly, kellyPercentage, suggestedRisk, expectedValue, kellyRecommendation (string)."
+      }
+    },
+    {
+      "id": "portfolio_risk",
+      "type": "agent",
+      "label": "Portfolio Risk Assessment",
+      "config": {
+        "profile": "senior-risk-management-consultant",
+        "prompt": "Assess portfolio-level risk given current open positions and new trade. Calculate: total portfolio risk, correlation-adjusted risk (if positions provided), max drawdown potential, account risk after trade. Provide risk rating (low/medium/high) and recommendations. Return JSON with: totalPortfolioRisk, maxDrawdownPotential, accountRiskAfterTrade, riskRating, recommendations (array), canProceed (boolean)."
+      }
+    },
+    {
+      "id": "generate_report",
+      "type": "transform",
+      "label": "Generate Risk Report",
+      "config": {
+        "expression": "# Risk & Position Sizing Report\\n\\n## Trade Parameters\\n- Account Balance: ${{collect_params.accountBalance}}\\n- Risk per Trade: {{collect_params.riskPercent}}%\\n- Entry: ${{collect_params.entryPrice}}\\n- Stop Loss: ${{collect_params.stopLoss}}\\n{{#if collect_params.targetPrice}}\\n- Target: ${{collect_params.targetPrice}}\\n{{/if}}\\n\\n## Position Sizing\\n- **Position Size: {{calculate_risk.positionSize}} units**\\n- Risk Amount: ${{calculate_risk.riskAmount}}\\n- Risk per Unit: ${{calculate_risk.riskPerUnit}}\\n- Reward:Risk Ratio: {{calculate_risk.rewardRisk}}\\n- Potential Profit: ${{calculate_risk.potentialProfit}}\\n- Potential Loss: ${{calculate_risk.potentialLoss}}\\n\\n## Kelly Criterion\\n- Full Kelly: {{kelly_criterion.fullKelly}}%\\n- Half Kelly: {{kelly_criterion.halfKelly}}%\\n- Quarter Kelly: {{kelly_criterion.quarterKelly}}%\\n- **Suggested: {{kelly_criterion.suggestedRisk}}%**\\n- Expected Value: {{kelly_criterion.expectedValue}}\\n\\n## Portfolio Risk\\n- Total Portfolio Risk: {{portfolio_risk.totalPortfolioRisk}}%\\n- Max Drawdown Potential: {{portfolio_risk.maxDrawdownPotential}}%\\n- Risk Rating: **{{portfolio_risk.riskRating}}**\\n- Can Proceed: {{portfolio_risk.canProceed}}\\n\\n## Recommendations\\n{{#each portfolio_risk.recommendations}}\\n- {{this}}\\n{{/each}}"
+      }
+    }
+  ],
+  "edges": [
+    { "from": "collect_params", "to": "calculate_risk" },
+    { "from": "calculate_risk", "to": "kelly_criterion" },
+    { "from": "kelly_criterion", "to": "portfolio_risk" },
+    { "from": "portfolio_risk", "to": "generate_report" }
+  ],
+  "requires": {}
+}

@@ -1,0 +1,69 @@
+{
+  "$schema": "../schema/workflow.schema.json",
+  "name": "Multi-Timeframe Analysis Workflow",
+  "description": "Workflow for conducting multi-timeframe analysis (HTF/MTF/LTF alignment) and generating trade recommendations based on confluence of signals across timeframes.",
+  "version": "2026.3.4",
+  "author": { "name": "YEOMAN", "github": "MacCracken" },
+  "category": "trading",
+  "tags": ["trading", "multi-timeframe", "analysis", "confluence"],
+  "autonomyLevel": "L3",
+  "triggers": [
+    {
+      "type": "manual",
+      "config": {}
+    }
+  ],
+  "steps": [
+    {
+      "id": "htf_analysis",
+      "type": "agent",
+      "label": "Higher Timeframe Analysis",
+      "config": {
+        "profile": "trend-following-strategist",
+        "prompt": "Analyze the higher timeframe (weekly/monthly) for the given instrument. Identify: major trend direction, key support/resistance levels, major chart patterns, and macro outlook. Return JSON with: timeframe (string), trend (bullish/bearish/neutral), keyLevels (array), patterns (array), outlook (string), bias (string)."
+      }
+    },
+    {
+      "id": "mtf_analysis",
+      "type": "agent",
+      "label": "Middle Timeframe Analysis",
+      "config": {
+        "profile": "ict-smart-money-analyst",
+        "prompt": "Analyze the middle timeframe (4-hour/daily) for alignment with higher timeframe. Identify: current market structure, order blocks, liquidity zones, and intermediate trend. Return JSON with: timeframe (string), trend (bullish/bearish/neutral), structure (object), orderBlocks (array), liquidityPools (array), alignment (boolean), bias (string)."
+      }
+    },
+    {
+      "id": "ltf_analysis",
+      "type": "agent",
+      "label": "Lower Timeframe Entry Setup",
+      "config": {
+        "profile": "naked-chart-analyst",
+        "prompt": "Analyze the lower timeframe (1-hour/15-min) for entry opportunities. Identify: exact entry zones, stop loss placement, precise take profit targets, and entry triggers. Return JSON with: timeframe (string), entryZones (array), stopLoss (string), takeProfit (string), triggers (array), setupQuality (high/medium/low)."
+      }
+    },
+    {
+      "id": "confluence_check",
+      "type": "agent",
+      "label": "Confluence & Signal Synthesis",
+      "config": {
+        "profile": "technical-analysis-specialist",
+        "prompt": "Synthesize analysis from all timeframes to generate trade recommendation. Check for confluence: HTF/MTF/LTF alignment, multiple support/resistance hits, indicator confirmation. Return JSON with: recommendation (buy/sell/no-trade), confidence (0-100), confluenceFactors (array), riskLevel (low/medium/high), entry (string), stop (string), target (string), rationale (string)."
+      }
+    },
+    {
+      "id": "generate_report",
+      "type": "transform",
+      "label": "Generate MTF Report",
+      "config": {
+        "expression": "# Multi-Timeframe Analysis Report\\n\\n## Higher Timeframe ({{htf_analysis.timeframe}})\\n- Trend: {{htf_analysis.trend}}\\n- Bias: {{htf_analysis.bias}}\\n- Key Levels: {{htf_analysis.keyLevels}}\\n- Outlook: {{htf_analysis.outlook}}\\n\\n## Middle Timeframe ({{mtf_analysis.timeframe}})\\n- Trend: {{mtf_analysis.trend}}\\n- Alignment with HTF: {{mtf_analysis.alignment}}\\n- Bias: {{mtf_analysis.bias}}\\n- Structure: {{mtf_analysis.structure}}\\n\\n## Lower Timeframe ({{ltf_analysis.timeframe}})\\n- Entry Zones: {{ltf_analysis.entryZones}}\\n- Stop Loss: {{ltf_analysis.stopLoss}}\\n- Take Profit: {{ltf_analysis.takeProfit}}\\n- Setup Quality: {{ltf_analysis.setupQuality}}\\n\\n## Final Recommendation\\n- **Signal: {{confluence_check.recommendation}}**\\n- Confidence: {{confluence_check.confidence}}%\\n- Risk Level: {{confluence_check.riskLevel}}\\n- Entry: {{confluence_check.entry}}\\n- Stop: {{confluence_check.stop}}\\n- Target: {{confluence_check.target}}\\n\\n## Confluence Factors\\n{{#each confluence_check.confluenceFactors}}\\n- {{this}}\\n{{/each}}\\n\\n## Rationale\\n{{confluence_check.rationale}}"
+      }
+    }
+  ],
+  "edges": [
+    { "from": "htf_analysis", "to": "mtf_analysis" },
+    { "from": "mtf_analysis", "to": "ltf_analysis" },
+    { "from": "ltf_analysis", "to": "confluence_check" },
+    { "from": "confluence_check", "to": "generate_report" }
+  ],
+  "requires": {}
+}

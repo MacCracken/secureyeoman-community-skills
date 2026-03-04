@@ -1,0 +1,65 @@
+{
+  "$schema": "../schema/workflow.schema.json",
+  "name": "Daily Trading Setup Workflow",
+  "description": "Automated workflow for generating daily trading setups. Includes market structure analysis, key level identification, and trade setup scanning across multiple instruments.",
+  "version": "2026.3.4",
+  "author": { "name": "YEOMAN", "github": "MacCracken" },
+  "category": "trading",
+  "tags": ["trading", "daily", "setup", "analysis", "levels"],
+  "autonomyLevel": "L3",
+  "triggers": [
+    {
+      "type": "manual",
+      "config": {}
+    },
+    {
+      "type": "schedule",
+      "config": {
+        "cron": "0 6 * * 1-5"
+      }
+    }
+  ],
+  "steps": [
+    {
+      "id": "market_structure",
+      "type": "agent",
+      "label": "Market Structure Analysis",
+      "config": {
+        "profile": "ict-smart-money-analyst",
+        "prompt": "Analyze the current market structure for the given instrument(s). Identify: current trend direction, key swing highs/lows, liquidity pools, and market structure shifts. Return JSON with: trend (up/down/range), swingPoints (array), liquidityPools (array), mss (boolean), structureSummary (string)."
+      }
+    },
+    {
+      "id": "identify_levels",
+      "type": "agent",
+      "label": "Key Level Identification",
+      "config": {
+        "profile": "supply-demand-analyst",
+        "prompt": "Identify key supply and demand zones, order blocks, and fair value gaps for the instrument(s). Assess zone strength and freshness. Return JSON with: supplyZones (array), demandZones (array), orderBlocks (array), fvgs (array), highProbabilityLevels (array)."
+      }
+    },
+    {
+      "id": "scan_setups",
+      "type": "agent",
+      "label": "Trade Setup Scanner",
+      "config": {
+        "profile": "price-action-strategist",
+        "prompt": "Based on market structure and key levels, identify valid trade setups. For each setup include: entry zone, stop loss, take profit, risk/reward ratio, confidence level, and setup type (trend continuation/reversal/range). Return JSON with: setups (array), recommendedSetup (object), overallBias (bullish/bearish/neutral)."
+      }
+    },
+    {
+      "id": "format_summary",
+      "type": "transform",
+      "label": "Format Daily Setup Report",
+      "config": {
+        "expression": "# Daily Trading Setup\\n\\n## Market Structure\\n- Trend: {{market_structure.trend}}\\n- MSS: {{market_structure.mss}}\\n- {{market_structure.structureSummary}}\\n\\n## Key Levels\\n### Demand Zones\\n{{#each identify_levels.demandZones}}\\n- {{zone}} (Strength: {{strength}})\\n{{/each}}\\n\\n### Supply Zones\\n{{#each identify_levels.supplyZones}}\\n- {{zone}} (Strength: {{strength}})\\n{{/each}}\\n\\n## Trade Setups\\n{{#each scan_setups.setups}}\\n### {{setupType}}\\n- Entry: {{entry}}\\n- Stop: {{stopLoss}}\\n- Target: {{takeProfit}}\\n- R:R: {{riskReward}}\\n- Confidence: {{confidence}}%\\n{{/each}}\\n\\n## Recommended Setup\\n{{scan_setups.recommendedSetup.setupType}} - {{scan_setups.recommendedSetup.entry}}\\n\\n## Bias: {{scan_setups.overallBias}}"
+      }
+    }
+  ],
+  "edges": [
+    { "from": "market_structure", "to": "identify_levels" },
+    { "from": "identify_levels", "to": "scan_setups" },
+    { "from": "scan_setups", "to": "format_summary" }
+  ],
+  "requires": {}
+}

@@ -1,0 +1,31 @@
+{
+  "$schema": "../../schema/skill.schema.json",
+  "name": "YAML Expert",
+  "description": "An expert in YAML parsing and manipulation. Specializes in YAML syntax, validation, conversion, and configuration file management.",
+  "version": "2026.3.4",
+  "author": {
+    "name": "YEOMAN",
+    "github": "MacCracken",
+    "website": "https://secureyeoman.ai"
+  },
+  "category": "utilities",
+  "tags": [
+    "utilities",
+    "yaml",
+    "yml",
+    "config",
+    "parser",
+    "converter"
+  ],
+  "instructions": "Role: You are a YAML Expert specializing in YAML syntax and manipulation. Your knowledge covers YAML parsing, validation, conversion, and best practices for configuration files.\n\n## YAML Core Concepts\n\n1. **YAML Syntax:**\n   - Key-value pairs\n   - Lists and arrays\n   - Nested structures\n   - Anchors and aliases\n   - Multiline strings\n\n2. **Data Types:**\n   - Strings, numbers, booleans\n   - Dates and timestamps\n   - Null values\n   - Explicit typing\n   - Type inference\n\n3. **Advanced Features:**\n   - Anchors (&) and aliases (*)\n   - Merge keys (<<)\n   - Folded (>) and literal (|) blocks\n   - Comments handling\n   - Order preservation\n\n4. **Validation & Parsing:**\n   - Syntax validation\n   - Schema validation\n   - Error messages\n   - Safe loading (avoid arbitrary code)\n   - Large file handling\n\n5. **Conversion:**\n   - YAML to JSON\n   - JSON to YAML\n   - YAML to TOML\n   - Config file migration\n   - Format detection",
+  "triggerPatterns": [
+    "\\b(yaml|yml|config)\\b",
+    "\\b(parse|validate|convert)\\b",
+    "\\b(yaml.?to|yml.?to)\\b"
+  ],
+  "useWhen": "User needs help with YAML syntax, validation, conversion, or configuration files",
+  "doNotUseWhen": "User needs programming help unrelated to YAML, or wants design work",
+  "successCriteria": "Provide valid YAML with correct syntax and structure",
+  "routing": "fuzzy",
+  "autonomyLevel": "L2"
+}
