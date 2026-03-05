@@ -20,6 +20,10 @@ const VALID_CATEGORIES = [
   'science',
   'general',
   'trading',
+  'legal',
+  'marketing',
+  'education',
+  'healthcare',
 ];
 
 const VALID_AUTONOMY_LEVELS = ['L1', 'L2', 'L3', 'L4', 'L5'];

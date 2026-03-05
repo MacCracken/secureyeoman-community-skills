@@ -79,7 +79,12 @@
         "design",
         "finance",
         "science",
-        "general"
+        "general",
+        "trading",
+        "legal",
+        "marketing",
+        "education",
+        "healthcare"
       ],
       "default": "general",
       "description": "Skill category — must match the directory name"
