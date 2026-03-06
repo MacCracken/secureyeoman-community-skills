@@ -23,10 +23,10 @@
       "description": "Short description of the personality"
     },
     "traits": {
-      "type": "array",
-      "items": { "type": "string", "maxLength": 50 },
-      "maxItems": 20,
-      "description": "Trait key names (detail goes in the # Traits section)"
+      "type": "object",
+      "additionalProperties": { "type": "string", "maxLength": 50 },
+      "maxProperties": 30,
+      "description": "Disposition key-value pairs (e.g. formality: formal, humor: dry). Standard keys: formality, humor, verbosity, directness, warmth, empathy, patience, confidence, creativity, risk_tolerance, curiosity, skepticism, autonomy, pedagogy, precision."
     },
     "defaultModel": {
       "oneOf": [
