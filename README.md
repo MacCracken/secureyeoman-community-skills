@@ -1,6 +1,39 @@
-# SecureYeoman Community Skills
+# SecureYeoman Community Repository
 
-A community-maintained registry of skills for the [SecureYeoman](https://github.com/MacCracken/secureyeoman) agent platform.
+A community-maintained registry of skills, workflows, swarm templates, council templates, security templates, personalities, and themes for the [SecureYeoman](https://github.com/MacCracken/secureyeoman) agent platform.
+
+## Repository Stats
+
+| Type | Count | Location |
+|------|------:|----------|
+| **Skills** | 87 | `skills/` (13 categories) |
+| **Workflows** | 7 | `workflows/` |
+| **Swarm Templates** | 2 | `swarms/` |
+| **Council Templates** | 2 | `councils/` |
+| **Security Templates** | 7 | `security-templates/` |
+| **Personalities** | 3 | `personalities/` |
+| **Themes** | 3 | `themes/` |
+| **JSON Schemas** | 7 | `schema/` |
+| **Validation Tests** | 1,310 | `skills/skills.test.ts` |
+| **Total items** | **111** | |
+
+### Skills by Category
+
+| Category | Count | Examples |
+|----------|------:|---------|
+| Trading | 19 | Elliott Wave Analyst, Crypto Analyst, Options Strategist |
+| Finance | 10 | Financial Planner, Bookkeeping Specialist, Tax Advisor |
+| Productivity | 10 | Executive Assistant, Calendar Intelligence, Email Composer |
+| Design | 7 | Brand Designer, Accessibility Specialist, Diagram Architect |
+| Development | 7 | Code Reviewer, API Architect, DevOps Engineer |
+| General | 7 | Data Scientist, Emoji Mood Detector, Bookmark Curator |
+| Security | 7 | Cloud Security Architect, Ethical Whitehat Hacker, Compliance Analyst |
+| Utilities | 7 | Data Formatter, Code Converter, Base64 Encoder |
+| Science | 3 | Research assistance, data analysis, literature review |
+| Legal | 3 | Contract Reviewer, legal analysis |
+| Marketing | 3 | Content Strategist, brand marketing |
+| Education | 2 | Curriculum Designer, career counseling |
+| Healthcare | 2 | Clinical Documentation Specialist |
 
 ---
 
@@ -143,6 +176,12 @@ A **swarm template** defines a multi-agent team that tackles a task cooperativel
 | `sequential` | Roles run in order; each receives the previous role's output |
 | `parallel` | Roles run concurrently; a coordinator synthesises results |
 | `dynamic` | A coordinator agent decides which roles to invoke and in what order |
+
+---
+
+## Council Templates
+
+A **council template** defines a multi-round group deliberation where multiple AI agents discuss and debate to reach consensus on a topic. A facilitator agent guides the discussion through rounds.
 
 ---
 
@@ -390,16 +429,21 @@ All skills in this repository ship with 5 trigger patterns. New contributions mu
 
 ## Categories
 
-| Category | Description |
-|----------|-------------|
-| `development` | Code review, debugging, architecture, documentation |
-| `productivity` | Meeting summaries, task management, writing assistance |
-| `security` | Security research, vulnerability analysis, threat modeling |
-| `utilities` | Data formatting, conversion, general-purpose helpers |
-| `design` | UI/UX review, design critique, accessibility checks |
-| `finance` | Financial analysis, budgeting, investment research |
-| `science` | Research assistance, data analysis, literature review |
-| `general` | Skills that don't fit neatly into another category |
+| Category | Count | Description |
+|----------|------:|-------------|
+| `trading` | 19 | Trading strategies, market analysis, portfolio management |
+| `finance` | 10 | Financial analysis, budgeting, investment research |
+| `productivity` | 10 | Meeting summaries, task management, writing assistance |
+| `development` | 7 | Code review, debugging, architecture, documentation |
+| `design` | 7 | UI/UX review, design critique, accessibility checks |
+| `general` | 7 | Skills that don't fit neatly into another category |
+| `security` | 7 | Security research, vulnerability analysis, threat modeling |
+| `utilities` | 7 | Data formatting, conversion, general-purpose helpers |
+| `science` | 3 | Research assistance, data analysis, literature review |
+| `legal` | 3 | Contract review, legal analysis, regulatory compliance |
+| `marketing` | 3 | Content strategy, brand marketing, campaign analysis |
+| `education` | 2 | Curriculum design, tutoring, career counseling |
+| `healthcare` | 2 | Clinical documentation, health informatics |
 
 ---
 
@@ -407,34 +451,31 @@ All skills in this repository ship with 5 trigger patterns. New contributions mu
 
 ```
 skills/
-  development/
-    code-reviewer.json
-    sql-expert.json
-  productivity/
-    meeting-summarizer.json
-  security/
-    security-researcher.json
-  utilities/
-    data-formatter.json
-workflows/
-  daily-morning-brief.json
-  content-review-gate.json
-  research-report-pipeline.json
-swarms/
-  security-audit-team.json
-  full-stack-dev-crew.json
-security-templates/
-  incident-response-playbook/
-    system.md
-    user.md
-    metadata.json
-  cloud-security-posture/
-    ...
+  trading/          # 19 skills
+  finance/          # 10 skills
+  productivity/     # 10 skills
+  development/      # 7 skills
+  design/           # 7 skills
+  general/          # 7 skills
+  security/         # 7 skills
+  utilities/        # 7 skills
+  science/          # 3 skills
+  legal/            # 3 skills
+  marketing/        # 3 skills
+  education/        # 2 skills
+  healthcare/       # 2 skills
+workflows/          # 7 workflow templates
+swarms/             # 2 swarm templates
+councils/           # 2 council templates
+security-templates/ # 7 security assessment templates
+personalities/      # 3 personality profiles
+themes/             # 3 dashboard themes
+schema/             # 7 JSON validation schemas
 ```
 
 Skills **must** live under `skills/<category>/<skill-name>.json`. The category in the path and the `category` field in the JSON should match.
 
-Workflows live under `workflows/<name>.json`, swarm templates under `swarms/<name>.json`, and security templates under `security-templates/<name>/`.
+Workflows live under `workflows/<name>.json`, swarm templates under `swarms/<name>.json`, council templates under `councils/<name>.json`, and security templates under `security-templates/<name>/`.
 
 ---
 
