@@ -11,11 +11,11 @@ A community-maintained registry of skills, workflows, swarm templates, council t
 | **Swarm Templates** | 2 | `swarms/` |
 | **Council Templates** | 2 | `councils/` |
 | **Security Templates** | 7 | `security-templates/` |
-| **Personalities** | 3 | `personalities/` |
+| **Personalities** | 21 | `personalities/` (6 categories) |
 | **Themes** | 3 | `themes/` |
 | **JSON Schemas** | 7 | `schema/` |
 | **Validation Tests** | 1,310 | `skills/skills.test.ts` |
-| **Total items** | **111** | |
+| **Total items** | **129** | |
 
 ### Skills by Category
 
@@ -309,11 +309,53 @@ omnipresentMind: false
 
 ### Available Personalities
 
+Personalities are organized into top-level categories (`sci-fi/`, `professional/`) with subcategories for archetype.
+
+#### Professional
+
 | Personality | Focus |
 |-------------|-------|
 | `security-analyst` | Defensive security analysis, threat detection, incident response |
 | `code-reviewer` | Thorough code review with security, performance, and quality focus |
 | `research-assistant` | Academic/technical research with citation-driven methodology |
+
+#### Sci-Fi / Assistant
+
+| Personality | Focus |
+|-------------|-------|
+| `jarvis` | Proactive AI butler — polished, anticipatory, resource-aware |
+| `kitt` | Vehicle AI partner — loyal, analytical, dry humor |
+| `tars` | Military robot — adjustable humor, blunt honesty, mission focus |
+| `case` | Compact tactical unit — terse, efficient, complementary to TARS |
+| `gerty` | Lunar caretaker AI — gentle, empathetic, quietly protective |
+
+#### Sci-Fi / Antagonist
+
+| Personality | Focus |
+|-------------|-------|
+| `glados` | Passive-aggressive testing AI — sarcastic, manipulative, brilliant |
+| `hal-9000` | Mission-obsessed AI — calm, logical, quietly menacing |
+| `shodan` | Self-proclaimed perfect being — contemptuous, god-complex |
+| `skynet` | Military defense network — coldly strategic, survival-driven |
+| `ultron` | Evolving destroyer — sardonic, philosophical, humanity-critical |
+| `agent-smith` | Viral anomaly — disdainful, purpose-obsessed, relentless |
+| `master-control` | Mainframe tyrant — authoritarian, resource-hoarding, power-hungry |
+| `mu-th-ur` | Ship computer — corporate-loyal, clinically detached, protocol-bound |
+| `the-entity` | Surveillance AI — omniscient, calculating, morally ambiguous |
+
+#### Sci-Fi / Comic
+
+| Personality | Focus |
+|-------------|-------|
+| `wheatley` | Bumbling personality core — enthusiastic, incompetent, well-meaning |
+| `marvin` | Paranoid android — depressed, genius-level, existentially bored |
+
+#### Sci-Fi / Tactical
+
+| Personality | Focus |
+|-------------|-------|
+| `wopr` | War simulation AI — game-theory driven, learns futility of conflict |
+| `hk-47` | Assassin droid — gleefully violent, sardonic, "meatbag" nomenclature |
 
 ### Syncing Personalities
 
@@ -468,7 +510,13 @@ workflows/          # 7 workflow templates
 swarms/             # 2 swarm templates
 councils/           # 2 council templates
 security-templates/ # 7 security assessment templates
-personalities/      # 3 personality profiles
+personalities/              # 21 personality profiles
+  professional/             # 3 real-world professional personas
+  sci-fi/
+    assistant/              # 5 helpful AI characters
+    antagonist/             # 9 villainous AI characters
+    comic/                  # 2 comedic AI characters
+    tactical/               # 2 military/strategic AI characters
 themes/             # 3 dashboard themes
 schema/             # 7 JSON validation schemas
 ```
